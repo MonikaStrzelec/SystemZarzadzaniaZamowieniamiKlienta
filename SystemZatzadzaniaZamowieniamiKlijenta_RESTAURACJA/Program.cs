@@ -1,5 +1,8 @@
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +21,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Home());
+
         }
     }
 }
