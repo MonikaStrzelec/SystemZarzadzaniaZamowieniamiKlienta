@@ -13,19 +13,23 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         public ChoosingMethodPayment()
         {
             InitializeComponent();
+            label2.Text = "Sposób płatności: BLIK";
+            try
+            {
+                if (radioButton1.Checked)
+                {//GOTOWKA
+                    label2.Text = "Sposób płatności: Płatność gotówką";
+                }
+                else if (radioButton2.Checked)
+                {//BLIK
 
-            if (radioButton1.Checked)
-            {//GOTOWKA
-                label2.Text = "Sposób płatności: Płatność gotówką";
-            }
-            else if (radioButton2.Checked)
-            {//BLIK
-                label2.Text = "Sposób płatności: BLIK";
-            }
-            else if (radioButton3.Checked)
-            {//KARTA PLATNICZA
-                label2.Text = "Sposób płatności: Kartą płatniczą";
-            }
+                    label2.Text = "Sposób płatności: BLIK";
+                }
+                else if (radioButton3.Checked)
+                {//KARTA PLATNICZA
+                    label2.Text = "Sposób płatności: Kartą płatniczą";
+                }
+            }catch { label2.Text = ""; }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -69,5 +73,17 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 DialogResult result = MessageBox.Show("Musisz wybrać petodę płatności!", "Confirmation", MessageBoxButtons.YesNo);
             }
         }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+        //public void CreateMyLabel0()
+        //{
+        //    Label label10 = new Label();
+        //    Image image1 = Image.FromFile("D:\\INFORMATYKA\\sem 6\\projektRestauracja\\ikony\\gotowka.jpg");
+        //    label10.Size = new Size(image1.Width, image1.Height);
+        //    label10.Image = image1;
+        //}
     }
 }

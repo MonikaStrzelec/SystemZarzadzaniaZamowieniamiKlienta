@@ -67,5 +67,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ChoosingMethodPayment openForm = new ChoosingMethodPayment();
+            openForm.ShowDialog();
+        }
     }
 }

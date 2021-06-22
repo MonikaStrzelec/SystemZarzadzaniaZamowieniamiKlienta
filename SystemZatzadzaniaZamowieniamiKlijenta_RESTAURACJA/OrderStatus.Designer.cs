@@ -29,10 +29,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // OrderStatus
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "OrderStatus";
             this.Text = "OrderStatus";
+            this.Load += new System.EventHandler(this.OrderStatus_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

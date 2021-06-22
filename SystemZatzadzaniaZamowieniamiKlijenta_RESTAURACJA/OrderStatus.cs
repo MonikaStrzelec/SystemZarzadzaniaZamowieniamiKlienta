@@ -14,5 +14,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             InitializeComponent();
         }
+
+        private void OrderStatus_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
