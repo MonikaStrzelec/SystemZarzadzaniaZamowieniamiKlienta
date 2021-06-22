@@ -22,18 +22,47 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //WALIDACJA adres
             if (string.IsNullOrWhiteSpace(userAddressStreet.Text))
             {
                 MessageBox.Show("Musisz wpisać adres");
-                userAddressStreet.Focus();
+                if (userAddressStreet.Text.Length < 4)
+                {
+                    MessageBox.Show("Sprawdź swój adres, jest za krótki");
+                } else
+                {
+                    if (userAddressStreet.Text.Length > 50)
+                    {
+                        MessageBox.Show("Sprawdź swój adres, jest za długi");
+                    }
+                }
                 return;
             }
+
+            //WALIDACJA numer ulicy
+            if (string.IsNullOrWhiteSpace(userAddressStreetNumber.Text))
+            {
+                MessageBox.Show("Musisz wpisać numer ulicy");
+                if (userAddressStreetNumber.Text.Length > 7)
+                {
+                    MessageBox.Show("Sprawdź swój numer ulicy, chyba jest za długi");
+                }
+                return;
+            }
+
+            //WALIDACJA kod pocztowy
             if (string.IsNullOrWhiteSpace(userAddressPostalCode.Text))
             {
                 MessageBox.Show("Musisz wpisać kod pocztowy");
-                userAddressPostalCode.Focus();
+                //userAddressPostalCode.Focus();
+                if (userAddressPostalCode.Text.Length > 5 && userAddressPostalCode.Text.Length <= 7)
+                {
+                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny kod pocztowy?");
+                }
                 return;
             }
+
+            //WALIDACJA miasto
             if (string.IsNullOrWhiteSpace(userAddressCity.Text))
             {
                 MessageBox.Show("Musisz wpisać miasto");
@@ -42,16 +71,17 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
             else
             {
-                String city = "Łódź";
-                if (userAddressCity.Text != city)
+                string city = "Łódź";
+                string city2 = "lodz";
+                if (!(userAddressCity.Text.Equals(city) || userAddressCity.Text.Equals(city2)) == true)
                 {
                     MessageBox.Show("Przykro nam ale nie obsługujemy dostawy po za Łodzią :( ");
+                    this.Close();
                     Home openForm = new Home();
                     openForm.ShowDialog();
                 }
                 else
-                {
-                    //wywołanie WYBORU SPOSOBU ZAPŁATY
+                {//wywołanie WYBORU SPOSOBU ZAPŁATY
                     ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
@@ -66,28 +96,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void userAddressStreet_TextChanged(object sender, EventArgs e)
-        {
-            if (((TextBox)sender).Text.Length < 4)
-            {
-                MessageBox.Show("Sprawdź swój adres, jest za krótki");
-            }
-            if (((TextBox)sender).Text.Length > 50)
-            {
-                MessageBox.Show("Sprawdź swój adres, jest za długi");
-            }
-        }
+        {}
 
         private void userAddressApartmentNumber_TextChanged(object sender, EventArgs e)
-        {
-            if (((TextBox)sender).Text.Length > 5)
-            {
-                MessageBox.Show("Czy numer mieszkania nie jest za długi?");
-            }
-        }
+        {}
 
         private void userAddressPostalCode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
     }
 }

@@ -35,14 +35,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label5 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.userAddressStreetNumber = new System.Windows.Forms.TextBox();
             this.userAddressCity = new System.Windows.Forms.TextBox();
             this.userAddressPostalCode = new System.Windows.Forms.TextBox();
-            this.userAddressFloorNumber = new System.Windows.Forms.TextBox();
             this.userAddressApartmentNumber = new System.Windows.Forms.TextBox();
             this.userAddressStreet = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -119,14 +119,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.userAddressStreetNumber);
             this.panel2.Controls.Add(this.userAddressCity);
             this.panel2.Controls.Add(this.userAddressPostalCode);
-            this.panel2.Controls.Add(this.userAddressFloorNumber);
             this.panel2.Controls.Add(this.userAddressApartmentNumber);
             this.panel2.Controls.Add(this.userAddressStreet);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label2);
@@ -134,6 +134,22 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(732, 226);
             this.panel2.TabIndex = 14;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 110);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(91, 20);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Numer ulicy:";
+            // 
+            // userAddressStreetNumber
+            // 
+            this.userAddressStreetNumber.Location = new System.Drawing.Point(8, 130);
+            this.userAddressStreetNumber.Name = "userAddressStreetNumber";
+            this.userAddressStreetNumber.Size = new System.Drawing.Size(301, 27);
+            this.userAddressStreetNumber.TabIndex = 11;
             // 
             // userAddressCity
             // 
@@ -151,18 +167,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.userAddressPostalCode.TabIndex = 9;
             this.userAddressPostalCode.TextChanged += new System.EventHandler(this.userAddressPostalCode_TextChanged);
             // 
-            // userAddressFloorNumber
-            // 
-            this.userAddressFloorNumber.Location = new System.Drawing.Point(325, 130);
-            this.userAddressFloorNumber.Name = "userAddressFloorNumber";
-            this.userAddressFloorNumber.Size = new System.Drawing.Size(319, 27);
-            this.userAddressFloorNumber.TabIndex = 8;
-            // 
             // userAddressApartmentNumber
             // 
-            this.userAddressApartmentNumber.Location = new System.Drawing.Point(8, 130);
+            this.userAddressApartmentNumber.Location = new System.Drawing.Point(326, 132);
             this.userAddressApartmentNumber.Name = "userAddressApartmentNumber";
-            this.userAddressApartmentNumber.Size = new System.Drawing.Size(301, 27);
+            this.userAddressApartmentNumber.Size = new System.Drawing.Size(318, 27);
             this.userAddressApartmentNumber.TabIndex = 7;
             this.userAddressApartmentNumber.TextChanged += new System.EventHandler(this.userAddressApartmentNumber_TextChanged);
             // 
@@ -193,19 +202,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label8.TabIndex = 4;
             this.label8.Text = "Kod pocztowy:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(324, 110);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 20);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Piętro:";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 108);
+            this.label6.Location = new System.Drawing.Point(322, 110);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(134, 20);
             this.label6.TabIndex = 2;
@@ -396,12 +396,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox userAddressCity;
         private System.Windows.Forms.TextBox userAddressPostalCode;
-        private System.Windows.Forms.TextBox userAddressFloorNumber;
         private System.Windows.Forms.TextBox userAddressApartmentNumber;
         private System.Windows.Forms.TextBox userAddressStreet;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
@@ -420,5 +418,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox userAddressStreetNumber;
     }
 }
