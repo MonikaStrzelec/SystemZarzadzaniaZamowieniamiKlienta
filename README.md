@@ -12,17 +12,17 @@ Aplikacja jest skierowana do klientów w różnym przedziale wiekowym, którzy c
 W pliku APP.config należy podac niezbędne dane do połaczenia się ze swoja baza danych.
 
 w plikach wykożystywane są:
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+* using System;
+* using System.Collections.Generic;
+* using System.ComponentModel;
+* using System.Configuration;
+* using System.Data;
+* using System.Data.SqlClient;
+* using System.Drawing;
+* using System.Linq;
+* using System.Text;
+* using System.Threading.Tasks;
+* using System.Windows.Forms;
 
 ## Instalacja
 Zaleca się pobranie programu za pomocą GitHube w dowolnym, pustym folderze.
