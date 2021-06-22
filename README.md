@@ -8,6 +8,9 @@ Aplikacja jest skierowana do klientów w różnym przedziale wiekowym, którzy c
 * Microsoft SQL Server Managment Studio- projekt współpracuje z bazą danych
 * Visual Studio 2019
 
+## UWAGA
+W pliku APP.config należy podac niezbędne dane do połaczenia się ze swoja baza danych.
+
 w plikach wykożystywane są:
 using System;
 using System.Collections.Generic;
