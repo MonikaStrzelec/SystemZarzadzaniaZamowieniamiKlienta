@@ -65,28 +65,22 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void ChoosingMethodPayment_Load(object sender, EventArgs e)
         {
-                label2.Text = "";
-
-                if (radioButton1.Checked == true)
-                {//GOTOWKA
-                    label2.Text = "Sposób płatności: Płatność BLIK";
-                }
-                if (radioButton2.Checked == true)
-                {//BLIK
-                    label2.Text = "Sposób płatności: Płatność gotówką";
-                }
-                if(radioButton3.Checked == true)
-                {//KARTA PLATNICZA
-                    label2.Text = "Sposób płatności: Kartą płatniczą";
-                }
 
         }
-        //public void CreateMyLabel0()
-        //{
-        //    Label label10 = new Label();
-        //    Image image1 = Image.FromFile("D:\\INFORMATYKA\\sem 6\\projektRestauracja\\ikony\\gotowka.jpg");
-        //    label10.Size = new Size(image1.Width, image1.Height);
-        //    label10.Image = image1;
-        //}
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {   //BLIK
+            label2.Text = "Sposób płatności: Płatność BLIK";
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {   //GOTOWKA
+            label2.Text = "Sposób płatności: Płatność gotówką";
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {   //KARTA PLATNICZA
+            label2.Text = "Sposób płatności: Kartą płatniczą";
+        }
     }
 }
