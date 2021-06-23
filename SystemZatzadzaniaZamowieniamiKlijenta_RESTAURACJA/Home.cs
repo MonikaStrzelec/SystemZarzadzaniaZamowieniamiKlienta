@@ -15,6 +15,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     public partial class Home : Form
     {
         List<Danie> listOfTheDishes = new List<Danie>();
+        List<PozycjaZamowienia> orderList = new List<PozycjaZamowienia>();
         public Home()
         {
             InitializeComponent();
@@ -49,6 +50,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void button5_Click(object sender, EventArgs e)
         { //wywołanie KOSZYKA ZAMÓWIEŃ
             OrderCart openForm = new OrderCart();
+            //wrzucamy tu listę
             openForm.ShowDialog();
         }
 
@@ -83,6 +85,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
 
             dataGridView1.ClearSelection();
+
+            cnn.Close();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -95,8 +99,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             Danie dish = new Danie();
             string chosenDish;
-            decimal priceOfTheDish, totalPrice = 0;
+            decimal priceOfTheDish, totalPrice =0, orderPrice=0;
             int amount = 0;
+            
+            if(!String.IsNullOrEmpty(textBox1.Text))
+            {
+                totalPrice = decimal.Parse(textBox1.Text);
+            }
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -120,25 +129,35 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 foreach (Danie d in listOfTheDishes)
                 {
                     totalPrice = totalPrice + d.CenaDania * amount;
-                }
-                textBox1.Text = totalPrice.ToString();
 
+                } 
+                //textBox1.Text = totalPrice.ToString();
+
+                /*for (int i = 0; i < dataGridView2.RowCount; i++)
+                {
+                    dataGridView2.Rows[i].Cells[1].Value = orderPrice;
+                    dataGridView2.Rows[i].Cells[2].Value = amount;
+
+                    totalPrice = dish.CenaDania * amount;
+
+                }*/
+
+                textBox1.Text = totalPrice.ToString();
 
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
-        {
-            Danie dish = new Danie();
+        {            
             string chosenDish;
             decimal priceOfTheDish, totalPrice = 0;
-            int amount = 0, amountToDelete = 0;
-            totalPrice = decimal.Parse(textBox1.Text);
+            int amount = 0, amountToDelete = 0, index=0;
+            //totalPrice = decimal.Parse(textBox1.Text);
 
             if (dataGridView2.SelectedRows.Count > 0)
             {
                 //Pobranie danych dania wybranego przez klienta
-                chosenDish = (string)dataGridView2.SelectedCells[0].Value;
+                chosenDish = (string)dataGridView2.SelectedCells[0].Value;                
                 priceOfTheDish = (decimal)dataGridView2.SelectedCells[1].Value;
                 amount = (int)dataGridView2.SelectedCells[2].Value;
                 amountToDelete = (int)numericUpDown1.Value;
@@ -146,25 +165,43 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 amount = amount - amountToDelete;
 
                 dataGridView2.SelectedCells[2].Value = amount;
-
+               
+                //Usunięcie wybranego dania z listy
+                for (int i=0; i < listOfTheDishes.Count;i++)
+                {
+                    index = listOfTheDishes.FindIndex(a => a.NazwaDania == chosenDish);
+                    listOfTheDishes.RemoveAt(index);
+                    
+                }
+               
                 //Całkowite usuwanie pozycji z koszyka
                 if (amount == 0)
                 {
                     dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
+                  
                 }
 
-
                 //Zliczanie ceny całkowitej
-                foreach (Danie d in listOfTheDishes)
+                /*foreach (Danie d in listOfTheDishes)
                 {
                     totalPrice = totalPrice - priceOfTheDish * amountToDelete;
                     textBox1.Text = totalPrice.ToString();
-                }
+                }*/
 
+               
 
                 if (totalPrice < 0)
                 {
                     textBox1.Text = "0";
+                }
+                else
+                {
+                    foreach (Danie d in listOfTheDishes)
+                    {
+                        totalPrice = totalPrice + d.CenaDania * amount;
+
+                    }
+                    textBox1.Text = totalPrice.ToString();
                 }
 
             }
@@ -188,6 +225,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 MessageBox.Show("Aktualnie nie posiadamy żadnych przystawek w ofercie!");
             }
+
+            cnn.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -210,7 +249,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
             dataGridView1.ClearSelection();
 
-
+            cnn.Close();
 
         }
     }
