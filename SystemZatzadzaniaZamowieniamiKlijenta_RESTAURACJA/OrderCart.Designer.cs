@@ -60,10 +60,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.numericuserPhoneNumber = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -232,6 +234,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.numericuserPhoneNumber);
             this.panel3.Controls.Add(this.userPhoneNumber);
             this.panel3.Controls.Add(this.userEmail);
             this.panel3.Controls.Add(this.userName);
@@ -360,6 +363,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // numericuserPhoneNumber
+            // 
+            this.numericuserPhoneNumber.Location = new System.Drawing.Point(326, 126);
+            this.numericuserPhoneNumber.Name = "numericuserPhoneNumber";
+            this.numericuserPhoneNumber.Size = new System.Drawing.Size(150, 27);
+            this.numericuserPhoneNumber.TabIndex = 10;
+            // 
             // OrderCart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -382,6 +392,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,5 +431,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox userAddressStreetNumber;
+        private System.Windows.Forms.NumericUpDown numericuserPhoneNumber;
     }
 }

@@ -30,6 +30,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -43,14 +45,27 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label1.Text = "AKTUALNE PROMOCJE:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(205, 104);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 29;
+            this.dataGridView1.Size = new System.Drawing.Size(359, 188);
+            this.dataGridView1.TabIndex = 2;
+            // 
             // Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Name = "Sale";
             this.Text = "Sale";
+            this.Load += new System.EventHandler(this.Sale_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,5 +74,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

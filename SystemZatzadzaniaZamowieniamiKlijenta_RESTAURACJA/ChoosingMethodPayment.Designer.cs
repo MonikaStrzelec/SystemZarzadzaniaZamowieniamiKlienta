@@ -296,6 +296,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.Controls.Add(this.panel3);
             this.Name = "ChoosingMethodPayment";
             this.Text = "ChoosingMethodPayment";
+            this.Load += new System.EventHandler(this.ChoosingMethodPayment_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.groupBox1.ResumeLayout(false);

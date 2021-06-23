@@ -13,23 +13,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         public ChoosingMethodPayment()
         {
             InitializeComponent();
-            label2.Text = "Sposób płatności: BLIK";
-            try
-            {
-                if (radioButton1.Checked)
-                {//GOTOWKA
-                    label2.Text = "Sposób płatności: Płatność gotówką";
-                }
-                else if (radioButton2.Checked)
-                {//BLIK
-
-                    label2.Text = "Sposób płatności: BLIK";
-                }
-                else if (radioButton3.Checked)
-                {//KARTA PLATNICZA
-                    label2.Text = "Sposób płatności: Kartą płatniczą";
-                }
-            }catch { label2.Text = ""; }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -55,18 +38,19 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void button1_Click(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
-            {//GOTOWKA
-                cashPayment openForm = new cashPayment();
+            {//Blik
+                blikPayment openForm = new blikPayment();
                 openForm.ShowDialog();
             }
             else if (radioButton2.Checked)
-            {//BLIK
-                blikPayment openForm = new blikPayment();
+            {//GOTÓWKA
+                OrderStatus openForm = new OrderStatus();
                 openForm.ShowDialog();
             }
             else if (radioButton3.Checked)
             {//KARTA PLATNICZA
-
+                cashPayment openForm = new cashPayment();
+                openForm.ShowDialog();
             }
             else
             {//brak zaznaczonej płatności
@@ -76,6 +60,25 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void label8_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void ChoosingMethodPayment_Load(object sender, EventArgs e)
+        {
+                label2.Text = "";
+
+                if (radioButton1.Checked == true)
+                {//GOTOWKA
+                    label2.Text = "Sposób płatności: Płatność BLIK";
+                }
+                if (radioButton2.Checked == true)
+                {//BLIK
+                    label2.Text = "Sposób płatności: Płatność gotówką";
+                }
+                if(radioButton3.Checked == true)
+                {//KARTA PLATNICZA
+                    label2.Text = "Sposób płatności: Kartą płatniczą";
+                }
 
         }
         //public void CreateMyLabel0()
