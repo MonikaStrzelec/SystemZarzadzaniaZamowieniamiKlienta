@@ -15,11 +15,22 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     public partial class Home : Form
     {
         List<Danie> listOfTheDishes = new List<Danie>();
-        List<PozycjaZamowienia> orderList = new List<PozycjaZamowienia>();
+        List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
+        decimal totalPrice = 0, priceOfTheDish = 0;
+        string chosenDish;
+
+
         public Home()
         {
             InitializeComponent();
-            refresh(); 
+
+            refresh();
+
+            //Przypisanie wartości kwoty całkowitej
+            if (!String.IsNullOrEmpty(textBox1.Text))
+            {
+                totalPrice = decimal.Parse(textBox1.Text);
+            }
         }
         void refresh()
         {
@@ -29,7 +40,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
             dataGridView1.Rows.Clear();
             //Wyświetlenie całej listy menu po uruchomieniu formatki 
-            SqlDataAdapter sql = new SqlDataAdapter("SELECT nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
+            SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
             DataTable dishes = new DataTable();
             sql.Fill(dishes);
             dataGridView1.DataSource = dishes;
@@ -42,7 +53,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
             cnn.Close();
         }
-            private void label1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -98,113 +109,117 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void button8_Click_1(object sender, EventArgs e)
         {
             Danie dish = new Danie();
-            string chosenDish;
-            decimal priceOfTheDish, totalPrice =0, orderPrice=0;
-            int amount = 0;
-            
-            if(!String.IsNullOrEmpty(textBox1.Text))
-            {
-                totalPrice = decimal.Parse(textBox1.Text);
-            }
+            PozycjaZamowienia orderItem = new PozycjaZamowienia();
+            int id, amount = 0;
+            decimal priceAfterAdding = 0, priceFromTextBox =0;
+
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 //Pobranie danych dania wybranego przez klienta
-                chosenDish = (string)dataGridView1.SelectedCells[0].Value;
-                priceOfTheDish = (decimal)dataGridView1.SelectedCells[1].Value;
+                id = (int)dataGridView1.SelectedCells[0].Value;
+                chosenDish = (string)dataGridView1.SelectedCells[1].Value;
+                priceOfTheDish = (decimal)dataGridView1.SelectedCells[2].Value;
                 amount = (int)numericUpDown1.Value;
 
 
                 dish.NazwaDania = chosenDish.ToString();
                 dish.CenaDania = priceOfTheDish;
-                //dataGridView2.Rows[0].Cells[0].Value = dish.NazwaDania;
+                dish.IdDanie = id;
+                orderItem.IdDania = id;
+                orderItem.IloscKonkretnegoDania = amount;
 
                 listOfTheDishes.Add(dish);
-
+                orderItemList.Add(orderItem);
+                
                 //Dodanie pozycji do koszyka
                 dataGridView2.Rows.Add(dish.NazwaDania, dish.CenaDania, amount);
 
-
-                //Zliczanie ceny całkowitej
-                foreach (Danie d in listOfTheDishes)
+                //Pobranie ceny z textbox
+                if (!String.IsNullOrEmpty(textBox1.Text))
                 {
-                    totalPrice = totalPrice + d.CenaDania * amount;
+                    priceFromTextBox = decimal.Parse(textBox1.Text);
+                }
 
-                } 
-                //textBox1.Text = totalPrice.ToString();
-
-                /*for (int i = 0; i < dataGridView2.RowCount; i++)
-                {
-                    dataGridView2.Rows[i].Cells[1].Value = orderPrice;
-                    dataGridView2.Rows[i].Cells[2].Value = amount;
-
-                    totalPrice = dish.CenaDania * amount;
-
-                }*/
-
+           
+                //Zliczanie jednostkowej ceny całkowitej
+                priceAfterAdding = dish.CenaDania * orderItem.IloscKonkretnegoDania;
+                totalPrice = priceFromTextBox + priceAfterAdding;
+               
                 textBox1.Text = totalPrice.ToString();
-
+               
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
-        {            
-            string chosenDish;
-            decimal priceOfTheDish, totalPrice = 0;
-            int amount = 0, amountToDelete = 0, index=0;
-            //totalPrice = decimal.Parse(textBox1.Text);
+        {
+            if (!String.IsNullOrEmpty(textBox1.Text))
+            {
+                totalPrice = decimal.Parse(textBox1.Text);
+            }
+           
+            int amount = 0, amountToDelete = 0, index = 0;
 
             if (dataGridView2.SelectedRows.Count > 0)
             {
                 //Pobranie danych dania wybranego przez klienta
-                chosenDish = (string)dataGridView2.SelectedCells[0].Value;                
-                priceOfTheDish = (decimal)dataGridView2.SelectedCells[1].Value;
-                amount = (int)dataGridView2.SelectedCells[2].Value;
-                amountToDelete = (int)numericUpDown1.Value;
-
-                amount = amount - amountToDelete;
-
-                dataGridView2.SelectedCells[2].Value = amount;
-               
-                //Usunięcie wybranego dania z listy
-                for (int i=0; i < listOfTheDishes.Count;i++)
+                try
                 {
-                    index = listOfTheDishes.FindIndex(a => a.NazwaDania == chosenDish);
-                    listOfTheDishes.RemoveAt(index);
-                    
-                }
-               
-                //Całkowite usuwanie pozycji z koszyka
-                if (amount == 0)
-                {
-                    dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
-                  
-                }
+                    chosenDish = (string)dataGridView2.SelectedCells[0].Value;
+                    priceOfTheDish = (decimal)dataGridView2.SelectedCells[1].Value;
+                    amount = (int)dataGridView2.SelectedCells[2].Value;
+                    amountToDelete = (int)numericUpDown1.Value;
 
-                //Zliczanie ceny całkowitej
-                /*foreach (Danie d in listOfTheDishes)
-                {
-                    totalPrice = totalPrice - priceOfTheDish * amountToDelete;
-                    textBox1.Text = totalPrice.ToString();
-                }*/
+                    amount = amount - amountToDelete;
 
-               
+                    dataGridView2.SelectedCells[2].Value = amount;
+                    decimal priceAfterDeleting = 0, newTotalPrice = 0;
 
-                if (totalPrice < 0)
-                {
-                    textBox1.Text = "0";
-                }
-                else
-                {
-                    foreach (Danie d in listOfTheDishes)
+                    priceAfterDeleting = priceOfTheDish * amountToDelete;
+
+                    newTotalPrice = totalPrice - priceAfterDeleting;
+                    textBox1.Text = newTotalPrice.ToString();
+
+
+                    //Usunięcie wybranego dania z listy
+                    for (int i = 0; i < listOfTheDishes.Count; i++)
                     {
-                        totalPrice = totalPrice + d.CenaDania * amount;
+                        index = listOfTheDishes.FindIndex(a => a.NazwaDania == chosenDish);
+                        newTotalPrice = listOfTheDishes[index].CenaDania;
+                        amount = orderItemList[index].IloscKonkretnegoDania;
 
+                        listOfTheDishes.RemoveAt(index);
+                        orderItemList.RemoveAt(index);
                     }
-                    textBox1.Text = totalPrice.ToString();
+
+                    //Usunięcie dania z koszyka
+                    try
+                    {
+                        int restAmount = (int)dataGridView2.SelectedCells[2].Value;
+                        if (restAmount == 0)
+                        {
+                            dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
                 }
+                catch(Exception)
+                {
+                    MessageBox.Show("Wybrano pustą pozycję!");
+                }
+                
+
 
             }
+
+                     
+            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
