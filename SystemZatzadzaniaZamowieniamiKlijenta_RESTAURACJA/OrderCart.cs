@@ -85,12 +85,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 validationTextNoSpecialCharacters(userAddressStreetNumber);
             }
 
-
-
-
-
-
-
             //WALIDACJA kod pocztowy
             if (string.IsNullOrWhiteSpace(userAddressPostalCode.Text))
             {
@@ -107,12 +101,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 validationTextNoSpecialCharacters(userAddressStreet);
                 validationTextWithoutTheNumber(userAddressStreet);
             }
-
-
-
-
-
-
 
             //WALIDACJA miasto
             if (string.IsNullOrWhiteSpace(userAddressCity.Text))
