@@ -1,4 +1,4 @@
-
+﻿
 # Ramenik: system zarządzania zamówieniami
 System do zamawiania jedzenia przez Internet z restauracji oferującej japońskie jedzenie z głównym uwzględnieniem ramenu. Restauracja będzie działać na terenie miasta Łodzi. System pozwoli klientowi na przejrzenie menu oraz zamówienie wymarzonego przez siebie dania. Jednocześnie podczas zamawiania klient będzie miał możliwość podglądu do zsumowanej ceny swojego zamówienia wraz z kosztami dostawy. Będzie też mógł przejrzeć zawartość koszyka oraz edytować ją. 
 
@@ -11,7 +11,7 @@ Aplikacja jest skierowana do klientów w różnym przedziale wiekowym, którzy c
 ## UWAGA
 W pliku APP.config należy podac niezbędne dane do połaczenia się ze swoja baza danych.
 
-w plikach wykożystywane są:
+w plikach wykorzystywane są:
 * using System;
 * using System.Collections.Generic;
 * using System.ComponentModel;
