@@ -14,5 +14,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             InitializeComponent();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OrderStatus openForm = new OrderStatus();
+            openForm.ShowDialog();
+        }
     }
 }

@@ -14,14 +14,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
     public partial class Home : Form
     {
-
-        
         public Home()
         {
             InitializeComponent();
-            refresh();
-          
-            
+            refresh(); 
         }
         void refresh()
         {
