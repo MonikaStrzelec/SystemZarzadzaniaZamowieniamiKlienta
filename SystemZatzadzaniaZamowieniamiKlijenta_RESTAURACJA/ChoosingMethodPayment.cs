@@ -16,19 +16,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-            //wywołanie STRONY GŁOWNEJ
+        {   //wywołanie STRONY GŁOWNEJ
             Home openForm = new Home();
             openForm.ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
-            //REZYGNACJA z zamówienia
+        {   //REZYGNACJA z zamówienia
             DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienie?", "Confirmation", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 MessageBox.Show("Płatność anulowana.");
+                //ZEROWANIE KOSZYKA?
                 this.Hide();
                 Home openForm = new Home();
                 openForm.ShowDialog();
@@ -44,7 +43,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
             else if (radioButton2.Checked)
             {//GOTÓWKA
-                OrderStatus openForm = new OrderStatus();
+                OrderStatusTrue openForm = new OrderStatusTrue();
                 openForm.ShowDialog();
             }
             else if (radioButton3.Checked)

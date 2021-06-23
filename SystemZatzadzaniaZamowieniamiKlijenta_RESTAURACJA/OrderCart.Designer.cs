@@ -47,7 +47,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.userPhoneNumber = new System.Windows.Forms.TextBox();
+            this.numericuserPhoneNumber = new System.Windows.Forms.NumericUpDown();
             this.userEmail = new System.Windows.Forms.TextBox();
             this.userName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -60,12 +60,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.numericuserPhoneNumber = new System.Windows.Forms.NumericUpDown();
+            this.userFamilyName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -234,8 +235,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.userFamilyName);
+            this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.numericuserPhoneNumber);
-            this.panel3.Controls.Add(this.userPhoneNumber);
             this.panel3.Controls.Add(this.userEmail);
             this.panel3.Controls.Add(this.userName);
             this.panel3.Controls.Add(this.label10);
@@ -247,18 +249,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel3.Size = new System.Drawing.Size(732, 177);
             this.panel3.TabIndex = 15;
             // 
-            // userPhoneNumber
+            // numericuserPhoneNumber
             // 
-            this.userPhoneNumber.Location = new System.Drawing.Point(8, 126);
-            this.userPhoneNumber.Name = "userPhoneNumber";
-            this.userPhoneNumber.Size = new System.Drawing.Size(301, 27);
-            this.userPhoneNumber.TabIndex = 9;
+            this.numericuserPhoneNumber.Location = new System.Drawing.Point(325, 127);
+            this.numericuserPhoneNumber.Name = "numericuserPhoneNumber";
+            this.numericuserPhoneNumber.Size = new System.Drawing.Size(319, 27);
+            this.numericuserPhoneNumber.TabIndex = 10;
             // 
             // userEmail
             // 
-            this.userEmail.Location = new System.Drawing.Point(325, 75);
+            this.userEmail.Location = new System.Drawing.Point(8, 127);
             this.userEmail.Name = "userEmail";
-            this.userEmail.Size = new System.Drawing.Size(319, 27);
+            this.userEmail.Size = new System.Drawing.Size(301, 27);
             this.userEmail.TabIndex = 8;
             // 
             // userName
@@ -271,7 +273,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 105);
+            this.label10.Location = new System.Drawing.Point(322, 104);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(116, 20);
             this.label10.TabIndex = 4;
@@ -280,7 +282,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(324, 55);
+            this.label11.Location = new System.Drawing.Point(7, 107);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(55, 20);
             this.label11.TabIndex = 3;
@@ -363,12 +365,21 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // numericuserPhoneNumber
+            // userFamilyName
             // 
-            this.numericuserPhoneNumber.Location = new System.Drawing.Point(326, 126);
-            this.numericuserPhoneNumber.Name = "numericuserPhoneNumber";
-            this.numericuserPhoneNumber.Size = new System.Drawing.Size(150, 27);
-            this.numericuserPhoneNumber.TabIndex = 10;
+            this.userFamilyName.Location = new System.Drawing.Point(326, 74);
+            this.userFamilyName.Name = "userFamilyName";
+            this.userFamilyName.Size = new System.Drawing.Size(318, 27);
+            this.userFamilyName.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(322, 52);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 20);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Nazwisko:";
             // 
             // OrderCart
             // 
@@ -390,9 +401,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,7 +426,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox userPhoneNumber;
         private System.Windows.Forms.TextBox userEmail;
         private System.Windows.Forms.TextBox userName;
         private System.Windows.Forms.Label label10;
@@ -432,5 +442,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox userAddressStreetNumber;
         private System.Windows.Forms.NumericUpDown numericuserPhoneNumber;
+        private System.Windows.Forms.TextBox userFamilyName;
+        private System.Windows.Forms.Label label7;
     }
 }

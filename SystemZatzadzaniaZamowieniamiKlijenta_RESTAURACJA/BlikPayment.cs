@@ -31,7 +31,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 MessageBox.Show("Płatność została zatwierdzona");
                 this.Close();
-                OrderStatus openForm = new OrderStatus();
+                OrderStatusTrue openForm = new OrderStatusTrue();
                 openForm.ShowDialog();
             } else
             {

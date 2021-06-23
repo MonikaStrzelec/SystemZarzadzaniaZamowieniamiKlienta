@@ -1,7 +1,7 @@
 ﻿
 namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
-    partial class OrderStatus
+    partial class OrderStatusTrue
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timeLabel = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -43,29 +44,41 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(271, 229);
+            this.timeLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.timeLabel.Location = new System.Drawing.Point(329, 29);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(50, 20);
+            this.timeLabel.Size = new System.Drawing.Size(109, 46);
             this.timeLabel.TabIndex = 0;
             this.timeLabel.Text = "label1";
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(380, 274);
+            this.startButton.Location = new System.Drawing.Point(542, 234);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(94, 29);
+            this.startButton.Size = new System.Drawing.Size(205, 64);
             this.startButton.TabIndex = 1;
-            this.startButton.Text = "button1";
+            this.startButton.Text = "Zamówienie dotarło!";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
-            // OrderStatus
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(90, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(233, 20);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Przewidziany czas zamówienia za:";
+            // 
+            // OrderStatusTrue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.timeLabel);
-            this.Name = "OrderStatus";
+            this.Name = "OrderStatusTrue";
             this.Text = "OrderStatus";
             this.Load += new System.EventHandler(this.OrderStatus_Load);
             this.ResumeLayout(false);
@@ -78,5 +91,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Label label1;
     }
 }

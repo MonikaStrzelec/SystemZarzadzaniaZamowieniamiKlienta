@@ -17,7 +17,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button5_Click(object sender, EventArgs e)
         {
-            OrderStatus openForm = new OrderStatus();
+            OrderStatusTrue openForm = new OrderStatusTrue();
             openForm.ShowDialog();
         }
     }
