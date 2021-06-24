@@ -31,7 +31,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 totalPrice = decimal.Parse(textBox1.Text);
             }
-
             textBox2.Text = "7";
             deleteOldClients();
         }
@@ -56,8 +55,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 MessageBox.Show(ex.Message);
             }
-
-           
             cnn.Close();
         }
 
@@ -68,8 +65,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             newTotalPrice = totalPrice * 0.90m;
             textBox1.Text = newTotalPrice.ToString();
             MessageBox.Show("Gratulujemy! Załapałeś się na promocję! \n Twój koszt całkowity to: " + newTotalPrice.ToString());
-
-
             return newTotalPrice;
         }
 
@@ -97,7 +92,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {//Pobranie aktualnego dnia
             var today = DateTime.Now.Date;
 
-
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
             SqlConnection cnn = new SqlConnection(connectionString);
             cnn.Open();
@@ -114,7 +108,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 DataTable sale = new DataTable();
                 sql.Fill(sale);
                 dataGridView3.DataSource = sale;
-
             }
             dataGridView3.ClearSelection();
             cnn.Close();
@@ -135,7 +128,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 dataGridView3.Columns[0].Width = 140;
             }
         }
-
 
         private void label1_Click(object sender, EventArgs e)
         {}
@@ -163,15 +155,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 salePrice = decimal.Parse(textBox1.Text);
             }
 
-
-
             //sprawdzenie godziny
             int hour = DateTime.Now.Hour;
             if (hour >= 12 && hour < 21)
             {
                 if (totalPrice > 20)
                 {
-                    
                     //Sprawdzenie czy poniedziałek i naliczenie zniżki
                     if (today.DayOfWeek.ToString() == "Monday")
                     {
@@ -183,14 +172,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     {                       
                         MessageBox.Show("Gratuluje twoja dostawa będzie darmowa!");
                     }
-
                     else
                     {
                         totalPrice = totalPrice + dostawa;
                     }
+
                     try
-                    {
-                        //Przejście do koszyka i wrzucenie listy zamówień
+                    {   //Przejście do koszyka i wrzucenie listy zamówień
                         OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
                         openForm.ShowDialog();
                     }
@@ -198,7 +186,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     {
                         MessageBox.Show(ex.Message);
                     }
-                   
                 }
                 else
                 {
@@ -388,7 +375,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OrderStatusTrue openForm = new OrderStatusTrue();
+            OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
             openForm.ShowDialog();
         }
 
