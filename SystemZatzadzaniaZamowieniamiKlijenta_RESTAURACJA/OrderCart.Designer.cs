@@ -40,6 +40,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label5 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.userAddressCity = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.userAddressStreetNumber = new System.Windows.Forms.TextBox();
             this.userAddressPostalCode = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.userAddressCity = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -184,6 +184,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(653, 170);
             this.panel2.TabIndex = 14;
+            // 
+            // userAddressCity
+            // 
+            this.userAddressCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userAddressCity.FormattingEnabled = true;
+            this.userAddressCity.Items.AddRange(new object[] {
+            "Łódź"});
+            this.userAddressCity.Location = new System.Drawing.Point(285, 136);
+            this.userAddressCity.Name = "userAddressCity";
+            this.userAddressCity.Size = new System.Drawing.Size(278, 23);
+            this.userAddressCity.TabIndex = 13;
+            this.userAddressCity.SelectedIndexChanged += new System.EventHandler(this.userAddressCity_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -438,17 +450,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.Text = "Zrezygnuj";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // userAddressCity
-            // 
-            this.userAddressCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.userAddressCity.FormattingEnabled = true;
-            this.userAddressCity.Items.AddRange(new object[] {
-            "Łódź"});
-            this.userAddressCity.Location = new System.Drawing.Point(285, 136);
-            this.userAddressCity.Name = "userAddressCity";
-            this.userAddressCity.Size = new System.Drawing.Size(278, 23);
-            this.userAddressCity.TabIndex = 13;
             // 
             // OrderCart
             // 

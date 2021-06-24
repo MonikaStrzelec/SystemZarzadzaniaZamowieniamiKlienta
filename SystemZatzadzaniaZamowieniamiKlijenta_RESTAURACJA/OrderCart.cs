@@ -197,7 +197,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 addressCustomer.NumerDomu = userAddressStreetNumber.Text;
                 addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
                 addressCustomer.KodPocztowy = userAddressPostalCode.Text;
-                addressCustomer.Miasto = userAddressCity.SelectedIndex.ToString();
+                addressCustomer.Miasto = userAddressCity.SelectedItem.ToString();
 
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
@@ -250,6 +250,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void userAddressCity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userAddressCity_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
