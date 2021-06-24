@@ -31,8 +31,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Nazwa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cena = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ilosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -64,11 +67,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.Nazwa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cena = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ilosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).BeginInit();
@@ -87,19 +87,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel1
             // 
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nazwa,
-            this.Cena,
-            this.Ilosc});
-            this.dataGridView1.Location = new System.Drawing.Point(10, 40);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(216, 210);
-            this.dataGridView1.TabIndex = 18;
-            this.dataGridView1.Text = "dataGridView1";
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.label3);
@@ -117,6 +104,34 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 19;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nazwa,
+            this.Cena,
+            this.Ilosc});
+            this.dataGridView1.Location = new System.Drawing.Point(10, 40);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(216, 210);
+            this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.Text = "dataGridView1";
+            // 
+            // Nazwa
+            // 
+            this.Nazwa.HeaderText = "Nazwa";
+            this.Nazwa.Name = "Nazwa";
+            // 
+            // Cena
+            // 
+            this.Cena.HeaderText = "Cena za szt";
+            this.Cena.Name = "Cena";
+            // 
+            // Ilosc
+            // 
+            this.Ilosc.HeaderText = "Ilość";
+            this.Ilosc.Name = "Ilosc";
             // 
             // label3
             // 
@@ -308,6 +323,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             this.numericuserPhoneNumber.Location = new System.Drawing.Point(284, 95);
             this.numericuserPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numericuserPhoneNumber.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.numericuserPhoneNumber.Name = "numericuserPhoneNumber";
             this.numericuserPhoneNumber.Size = new System.Drawing.Size(279, 23);
             this.numericuserPhoneNumber.TabIndex = 10;
@@ -428,21 +448,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Nazwa
-            // 
-            this.Nazwa.HeaderText = "Nazwa";
-            this.Nazwa.Name = "Nazwa";
-            // 
-            // Cena
-            // 
-            this.Cena.HeaderText = "Cena za szt";
-            this.Cena.Name = "Cena";
-            // 
-            // Ilosc
-            // 
-            this.Ilosc.HeaderText = "Ilość";
-            this.Ilosc.Name = "Ilosc";
-            // 
             // OrderCart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -458,9 +463,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OrderCart";
             this.Text = "OrderCart";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);

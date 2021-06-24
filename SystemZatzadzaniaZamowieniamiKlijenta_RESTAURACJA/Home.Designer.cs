@@ -40,6 +40,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button5 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.labelDelivery = new System.Windows.Forms.Label();
             this.LabelStatus = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -59,8 +61,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button9 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.labelDelivery = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -196,6 +196,23 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(324, 365);
             this.panel1.TabIndex = 10;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(140, 208);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(80, 23);
+            this.textBox2.TabIndex = 21;
+            // 
+            // labelDelivery
+            // 
+            this.labelDelivery.AutoSize = true;
+            this.labelDelivery.Location = new System.Drawing.Point(23, 217);
+            this.labelDelivery.Name = "labelDelivery";
+            this.labelDelivery.Size = new System.Drawing.Size(90, 15);
+            this.labelDelivery.TabIndex = 20;
+            this.labelDelivery.Text = "Kwota dostawy:";
             // 
             // LabelStatus
             // 
@@ -376,35 +393,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(143, 11);
+            this.dataGridView3.Location = new System.Drawing.Point(13, 14);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersWidth = 51;
-            this.dataGridView3.Size = new System.Drawing.Size(163, 85);
+            this.dataGridView3.Size = new System.Drawing.Size(293, 82);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.Text = "dataGridView3";
-            // 
-            // labelDelivery
-            // 
-            this.labelDelivery.AutoSize = true;
-            this.labelDelivery.Location = new System.Drawing.Point(23, 217);
-            this.labelDelivery.Name = "labelDelivery";
-            this.labelDelivery.Size = new System.Drawing.Size(90, 15);
-            this.labelDelivery.TabIndex = 20;
-            this.labelDelivery.Text = "Kwota dostawy:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(140, 208);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(80, 23);
-            this.textBox2.TabIndex = 21;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 556);
+            this.ClientSize = new System.Drawing.Size(999, 588);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label7);

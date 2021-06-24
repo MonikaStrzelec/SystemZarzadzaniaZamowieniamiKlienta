@@ -41,7 +41,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         public static string validationTextNoSpecialCharacters(TextBox textValidation)
         {
-            var hasSpecialChar = new Regex(@"[\| !#$%&/(:(?»«@£§€{}.-;'<>_,]+"); //Napisy które nie mogą mieć dziwnych znaków
+            var hasSpecialChar = new Regex(@"[\| !#$%&/()=?»«@£§€{}.-;'<>_,]+"); //Napisy które nie mogą mieć dziwnych znaków
             if (hasSpecialChar.IsMatch(textValidation.Text))
             {
                 MessageBox.Show("Wpisz poprawne dane, nie mogą zawierać znaków specjalnych", "Niepoprawne dane", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -175,16 +175,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
                 else if (userEmail.Text.Length > 5)
                 {
-                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny email?");
-                }
-                else
-                {
+
                     if (!this.userEmail.Text.Contains('@') || !this.userEmail.Text.Contains('.'))
                     {
                         MessageBox.Show("Wprowadź poprawny adres email", "Niepoprawny adres email", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    return;
+                                       
                 }
+               
 
 
                 //WALIDACJA numer telefonu
@@ -303,9 +301,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 //}
 
                 //wywołanie WYBORU SPOSOBU ZAPŁATY
-                ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
-                //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
-                openForm.ShowDialog();
+                DialogResult result = MessageBox.Show("Czy na pewno wprowadziłeś poprawne dane?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
+                    //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
+                    openForm.ShowDialog();
+                }
+                
             }
             catch (Exception ex)
             {

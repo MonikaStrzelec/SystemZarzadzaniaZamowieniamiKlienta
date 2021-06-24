@@ -23,10 +23,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             customerAddressListOK = customerAddressList;
             InitializeComponent();
         }
-        //public ChoosingMethodPayment()
-        //{
-        //    InitializeComponent();
-        //}
+       
 
         private void button2_Click(object sender, EventArgs e)
         {   //wywołanie STRONY GŁOWNEJ
@@ -36,7 +33,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button3_Click(object sender, EventArgs e)
         {   //REZYGNACJA z zamówienia
-            DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienie?", "Confirmation", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienia?", "Confirmation", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 MessageBox.Show("Płatność anulowana.");

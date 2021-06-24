@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
-    class Adresy
+    public class Adresy
     {
         int idAdres, idKlient;
         string ulica, numerDomu, numerMieszkania, kodPocztowy, miasto;

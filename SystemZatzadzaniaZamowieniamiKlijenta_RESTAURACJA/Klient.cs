@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
-    class Klient
+    public class Klient
     {
         int idKlient, nrtelefonu;
         string imie, nazwisko, email;
