@@ -18,8 +18,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Klient> clientList = new List<Klient>();
         List<Adresy> customerAddressList = new List<Adresy>();
-        List<Danie> listOfTheDishes2 = new List<Danie>();
-        List<PozycjaZamowienia> orderItemList2 = new List<PozycjaZamowienia>();
+       
         decimal totalPrice = 0;
         public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
         {
@@ -48,9 +47,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     }
                 }
             }
-
-            listOfTheDishes2 = listOfTheDishes;
-            orderItemList2 = orderItemList2;
+           
         }
 
         public static string validationTextNoSpecialCharacters(TextBox textValidation)
@@ -234,7 +231,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
                     !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList,listOfTheDishes2,orderItemList2,totalPrice);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
@@ -247,9 +244,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
 
         private void button1_Click(object sender, EventArgs e)
-        {   //wywołanie STRONY GŁOWNEJ
-            Home openForm = new Home();
-            openForm.ShowDialog();
+        {   
+            //Pytanie o rezygnacje i powrót do Strony głównej
+            DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienia?", "Potwierdzenie", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                Home openForm = new Home();
+                openForm.ShowDialog();
+            }
         }
 
         private void userAddressStreet_TextChanged(object sender, EventArgs e)

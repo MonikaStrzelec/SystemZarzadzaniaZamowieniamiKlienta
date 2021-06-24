@@ -18,35 +18,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private List<Klient> clientListOK;
         private List<Adresy> customerAddressListOK;
         decimal totalPrice = 0;
-        public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList, List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
+        public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
         {
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
             InitializeComponent();
-            int idRow = 0;
-            textBox1.Text = totalPrice.ToString();
-            foreach (Danie d in listOfTheDishes)
-            {
-                dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
-
-                foreach (PozycjaZamowienia o in orderItemList)
-                {
-                    if (o.IdDania == d.IdDanie)
-                    {
-
-                        idRow++;
-                        try
-                        {
-                            dataGridView1.Rows[idRow - 1].Cells[2].Value = o.IloscKonkretnegoDania;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-
-                    }
-                }
-            }
+            
 
         }
        
