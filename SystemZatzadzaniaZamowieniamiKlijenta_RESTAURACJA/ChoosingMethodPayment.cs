@@ -27,7 +27,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
 
-
+           
             /*            
             cnn.Open();
             SqlCommand comm = new SqlCommand("INSERT INTO Klient (idKlient,imie,nazwisko, email, nrtelefonu) " + " VALUES(3,'Karol', 'Krawczyl', 'miodowe@gmail.com',500600500)", cnn);
@@ -61,58 +61,16 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             cnn.Close();*/
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
-        {   //wywołanie STRONY GŁOWNEJ
-            Home openForm = new Home();
-            openForm.ShowDialog();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {   //REZYGNACJA z zamówienia
-            DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienia?", "Confirmation", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                MessageBox.Show("Płatność anulowana.");
-                //ZEROWANIE KOSZYKA?
-                this.Hide();
-                Home openForm = new Home();
-                openForm.ShowDialog();
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-            {//Blik
-                blikPayment openForm = new blikPayment();
-                openForm.ShowDialog();
-            }
-            else if (radioButton2.Checked)
-            {//GOTÓWKA
-                OrderStatusTrue openForm = new OrderStatusTrue();
-                openForm.ShowDialog();
-            }
-            else if (radioButton3.Checked)
-            {//KARTA PLATNICZA
-                cashPayment openForm = new cashPayment();
-                openForm.ShowDialog();
-            }
-            else
-            {//brak zaznaczonej płatności
-                DialogResult result = MessageBox.Show("Musisz wybrać petodę płatności!", "Confirmation", MessageBoxButtons.YesNo);
-            }
-
-
             foreach (Klient client in clientListOK)
             {
                 //DODANIE DO BAZY DANYCH
-               
-                cnn.Open();
+                               
 
-                //dodawanie do bazy
                 string sqlKlient = "INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @idKlient, @imie, @nazwisko, @email, @nrtelefonu)";
-                string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
+                string sqlKlient2 = "SELECT COUNT(*), MAX([idKlient]) FROM Klient";
+                cnn.Open();
                 SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
                 SqlDataReader dataReader = cmd1.ExecuteReader(); //uruchamianie zapytania
                 int output1 = 0;
@@ -125,12 +83,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
                 cmd1.Cancel();
                 dataReader.Close();
-
-                             
-
+                
                 SqlCommand cmd = new SqlCommand(sqlKlient, cnn);
                 cmd.Parameters.Add("@idKlient", SqlDbType.Int);
-                cmd.Parameters["@idKlient"].Value = 3;
+                cmd.Parameters["@idKlient"].Value = output1;
 
                 cmd.Parameters.Add("@imie", SqlDbType.NChar);
                 cmd.Parameters["@imie"].Value = client.Imie;
@@ -146,7 +102,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                cnn.Close();
 
+                
                 foreach (Adresy adresy in customerAddressListOK)
                 {
                     string connectionString2 = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
@@ -154,7 +112,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cnn2.Open();
                     //dodawanie do bazy
                     SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdres, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)", cnn2);
-                    string sqlAdresy2 = "SELECT COUNT(*), MAX([id]) FROM Adresy";
+                    string sqlAdresy2 = "SELECT COUNT(*), MAX([idAdres]) FROM Adresy";
                     SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn2);
                     SqlDataReader dataReader2 = cmd4.ExecuteReader();
                     int output2 = 0;
@@ -192,9 +150,52 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cmd3.ExecuteNonQuery();
                     cmd3.Dispose();
 
+                } 
+
+                if (radioButton1.Checked)
+                {//Blik
+                    blikPayment openForm = new blikPayment();
+                    openForm.ShowDialog();
                 }
+                else if (radioButton2.Checked)
+                {//GOTÓWKA
+                    OrderStatusTrue openForm = new OrderStatusTrue();
+                    openForm.ShowDialog();
+                }
+                else if (radioButton3.Checked)
+                {//KARTA PLATNICZA
+                    cashPayment openForm = new cashPayment();
+                    openForm.ShowDialog();
+                }
+                else
+                {//brak zaznaczonej płatności
+                    DialogResult result = MessageBox.Show("Musisz wybrać petodę płatności!", "Confirmation", MessageBoxButtons.YesNo);
+                }
+
+
+
             }
         }
+        private void button2_Click(object sender, EventArgs e)
+        {   //wywołanie STRONY GŁOWNEJ
+            Home openForm = new Home();
+            openForm.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {   //REZYGNACJA z zamówienia
+            DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienia?", "Confirmation", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                MessageBox.Show("Płatność anulowana.");
+                //ZEROWANIE KOSZYKA?
+                this.Hide();
+                Home openForm = new Home();
+                openForm.ShowDialog();
+            }
+        }
+
+       
 
 
         private void label8_Click(object sender, EventArgs e)
