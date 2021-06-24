@@ -27,15 +27,21 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             foreach (Danie d in listOfTheDishes)
             {
                 dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
-                id = d.IdDanie;
+                //id = d.IdDanie;
                 foreach (PozycjaZamowienia o in orderItemList)
                 {
-                    if (o.IdDania == id)
+                    if (o.IdDania == d.IdDanie)
                     {
+
+                        idRow++;
                         try
                         {
-                            idRow = id - 1;
-                            dataGridView1.Rows[idRow].Cells[2].Value = o.IloscKonkretnegoDania;
+                            /*
+                            for(int j=1; j <dataGridView1.Rows.Count;j++)
+                            {
+                                dataGridView1.Rows[j-1].Cells[2].Value = o.IloscKonkretnegoDania;
+                            }*/
+                            dataGridView1.Rows[idRow-1].Cells[2].Value = o.IloscKonkretnegoDania;
                         }
                         catch(Exception ex)
                         {

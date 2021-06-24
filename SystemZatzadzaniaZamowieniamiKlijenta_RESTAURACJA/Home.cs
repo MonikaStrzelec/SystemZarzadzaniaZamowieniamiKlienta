@@ -181,7 +181,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
             else
             {
-                MessageBox.Show("Przykro nam ale restauracja jest zamknięta! Zapraszamy codziennie w godzinach: 12-21");
+                MessageBox.Show("Przykro nam, ale restauracja jest zamknięta! Zapraszamy codziennie w godzinach: 12-21");
             }
         }
 
