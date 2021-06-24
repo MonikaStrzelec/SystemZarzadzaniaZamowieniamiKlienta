@@ -107,13 +107,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 
                 foreach (Adresy adresy in customerAddressListOK)
                 {
-                    string connectionString2 = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-                    SqlConnection cnn2 = new SqlConnection(connectionString2);
-                    cnn2.Open();
+                    cnn.Open();
                     //dodawanie do bazy
-                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdres, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)", cnn2);
+                    string sqlAdresy = "INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdres, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)";
                     string sqlAdresy2 = "SELECT COUNT(*), MAX([idAdres]) FROM Adresy";
-                    SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn2);
+                    SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn);
                     SqlDataReader dataReader2 = cmd4.ExecuteReader();
                     int output2 = 0;
                     while (dataReader2.Read())
@@ -123,14 +121,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                             output2 = Convert.ToInt32(dataReader2.GetValue(1)) + 1;
                         }
                     }
-                    cmd1.Cancel();
+                    cmd4.Cancel();
                     dataReader2.Close();
 
-                    SqlCommand cmd3 = new SqlCommand(sqlAdresy.ToString(), cnn2);
+
+                    SqlCommand cmd3 = new SqlCommand(sqlAdresy, cnn);
                     cmd3.Parameters.Add("@idAdres", SqlDbType.Int);
                     cmd3.Parameters["@idAdres"].Value = output2;
 
-                    cmd3.Parameters.Add("idKlient", SqlDbType.Int);
+                    cmd3.Parameters.Add("@idKlient", SqlDbType.Int);
                     cmd3.Parameters["@idKlient"].Value = output1;
 
                     cmd3.Parameters.Add("@ulica", SqlDbType.VarChar);
@@ -149,7 +148,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cmd3.Parameters["@miasto"].Value = adresy.Miasto;
                     cmd3.ExecuteNonQuery();
                     cmd3.Dispose();
-
+                    cnn.Close();
                 } 
 
                 if (radioButton1.Checked)
