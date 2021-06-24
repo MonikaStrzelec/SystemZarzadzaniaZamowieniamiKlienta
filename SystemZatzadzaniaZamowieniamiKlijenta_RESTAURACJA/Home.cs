@@ -156,15 +156,23 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     if (totalPrice > 200)
                     {                       
                         MessageBox.Show("Gratuluje twoja dostawa będzie darmowa!");
-                        //totalPrice = totalPrice - dostawa;
                     }
+
                     else
                     {
                         totalPrice = totalPrice + dostawa;
                     }
-                    //Przejście do koszyka i wrzucenie listy zamówień
-                    OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
-                    openForm.ShowDialog();
+                    try
+                    {
+                        //Przejście do koszyka i wrzucenie listy zamówień
+                        OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
+                        openForm.ShowDialog();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                   
                 }
                 else
                 {
@@ -195,7 +203,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             SqlConnection cnn = new SqlConnection(connectionString);
             cnn.Open();
             //wyświetlenie całej listy MENU
-            SqlDataAdapter sql = new SqlDataAdapter("SELECT nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
+            SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie,nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
             DataTable dishes = new DataTable();
             sql.Fill(dishes);
             dataGridView1.DataSource = dishes;
@@ -340,7 +348,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
             SqlConnection cnn = new SqlConnection(connectionString);
             cnn.Open();
-            SqlDataAdapter sql = new SqlDataAdapter("SELECT nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Przystawka'", cnn);
+            SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Przystawka'", cnn);
             DataTable dishes = new DataTable();
             sql.Fill(dishes);
             dataGridView1.DataSource = dishes;
@@ -358,7 +366,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             SqlConnection cnn = new SqlConnection(connectionString);
             cnn.Open();
             //Wyświetlenie listy ramenów            
-            SqlDataAdapter sql = new SqlDataAdapter("SELECT nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Ramen'", cnn);
+            SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Ramen'", cnn);
             DataTable dishes = new DataTable();
             sql.Fill(dishes);
             dataGridView1.DataSource = dishes;

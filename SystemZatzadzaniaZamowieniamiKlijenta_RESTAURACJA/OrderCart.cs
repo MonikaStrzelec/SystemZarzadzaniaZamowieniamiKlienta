@@ -32,8 +32,16 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {
                     if (o.IdDania == id)
                     {
-                        idRow = id - 1;
-                        dataGridView1.Rows[idRow].Cells[2].Value = o.IloscKonkretnegoDania;
+                        try
+                        {
+                            idRow = id - 1;
+                            dataGridView1.Rows[idRow].Cells[2].Value = o.IloscKonkretnegoDania;
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        
                     }
                 }
             }
