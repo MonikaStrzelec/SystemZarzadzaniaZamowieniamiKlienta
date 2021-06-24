@@ -360,6 +360,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             cnn.Close();
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            OrderStatusTrue openForm = new OrderStatusTrue();
+            openForm.ShowDialog();
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
