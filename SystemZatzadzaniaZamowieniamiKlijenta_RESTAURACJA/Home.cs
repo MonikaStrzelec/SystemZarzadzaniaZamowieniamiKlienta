@@ -23,8 +23,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         public Home()
         {
             InitializeComponent();
-
             refresh();
+            timerStatus();
 
             //Przypisanie wartości kwoty całkowitej
             if (!String.IsNullOrEmpty(textBox1.Text))
@@ -118,7 +118,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OrderStatusTrue openForm = new OrderStatusTrue();
+            OrderCart openForm = new OrderCart();
             openForm.ShowDialog();
         }
 
@@ -156,13 +156,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     priceFromTextBox = decimal.Parse(textBox1.Text);
                 }
 
-           
                 //Zliczanie jednostkowej ceny całkowitej
                 priceAfterAdding = dish.CenaDania * orderItem.IloscKonkretnegoDania;
                 totalPrice = priceFromTextBox + priceAfterAdding;
-               
                 textBox1.Text = totalPrice.ToString();
-               
             }
         }
 
@@ -172,12 +169,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 totalPrice = decimal.Parse(textBox1.Text);
             }
-           
             int amount = 0, amountToDelete = 0, index = 0;
 
             if (dataGridView2.SelectedRows.Count > 0)
-            {
-                //Pobranie danych dania wybranego przez klienta
+            {   //Pobranie danych dania wybranego przez klienta
                 try
                 {
                     chosenDish = (string)dataGridView2.SelectedCells[0].Value;
@@ -194,7 +189,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
                     newTotalPrice = totalPrice - priceAfterDeleting;
                     textBox1.Text = newTotalPrice.ToString();
-
 
                     //Usunięcie wybranego dania z listy
                     for (int i = 0; i < listOfTheDishes.Count; i++)
@@ -214,27 +208,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                         if (restAmount == 0)
                         {
                             dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
-
                         }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
-
                 }
                 catch(Exception)
                 {
                     MessageBox.Show("Wybrano pustą pozycję!");
                 }
-                
-
-
             }
-
-                     
-            
-
         }
 
         private void button4_Click(object sender, EventArgs e)
