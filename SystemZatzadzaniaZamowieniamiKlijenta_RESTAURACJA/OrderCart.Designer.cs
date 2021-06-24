@@ -31,6 +31,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -62,14 +64,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Nazwa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cena = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ilosc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -84,6 +87,19 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel1
             // 
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nazwa,
+            this.Cena,
+            this.Ilosc});
+            this.dataGridView1.Location = new System.Drawing.Point(10, 40);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(216, 210);
+            this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.Text = "dataGridView1";
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.label3);
@@ -93,6 +109,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(244, 317);
             this.panel1.TabIndex = 11;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(128, 257);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 19;
             // 
             // label3
             // 
@@ -404,22 +428,20 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridView1
+            // Nazwa
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 40);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(216, 210);
-            this.dataGridView1.TabIndex = 18;
-            this.dataGridView1.Text = "dataGridView1";
+            this.Nazwa.HeaderText = "Nazwa";
+            this.Nazwa.Name = "Nazwa";
             // 
-            // textBox1
+            // Cena
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(128, 257);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 19;
+            this.Cena.HeaderText = "Cena za szt";
+            this.Cena.Name = "Cena";
+            // 
+            // Ilosc
+            // 
+            this.Ilosc.HeaderText = "Ilość";
+            this.Ilosc.Name = "Ilosc";
             // 
             // OrderCart
             // 
@@ -436,6 +458,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OrderCart";
             this.Text = "OrderCart";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -445,7 +468,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             ((System.ComponentModel.ISupportInitialize)(this.numericuserPhoneNumber)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,5 +510,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cena;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ilosc;
     }
 }

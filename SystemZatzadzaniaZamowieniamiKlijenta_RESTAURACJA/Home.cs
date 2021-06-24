@@ -33,15 +33,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
         }
 
-        void setTotalPrice()
+        public decimal setTotalPrice(decimal totalPrice)
         {
-            string dzis = "Monday";
-            if (dzis == "Monday")
-            {
-                totalPrice = totalPrice * 0.90m;
-                textBox1.Text = totalPrice.ToString();
-            }
+            decimal newTotalPrice = 0;
+
+            newTotalPrice = totalPrice * 0.90m;
+            textBox1.Text = newTotalPrice.ToString();
+            MessageBox.Show("Gratulujemy! Załapałeś się na promocję! \n Twój koszt całkowity to: " + newTotalPrice.ToString());
+
+
+            return newTotalPrice;
         }
+
         void refresh()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
@@ -63,10 +66,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         void refreshSale(decimal totalPrice)
-        {
-            //Pobranie aktualnego dnia
+        {//Pobranie aktualnego dnia
             var today = DateTime.Now.Date;
-            string dzis = "Monday";
+
 
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -78,19 +80,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 sql.Fill(sale);
                 dataGridView3.DataSource = sale;
             }
-            else if (dzis == "Monday")
-            {//today.DayOfWeek.ToString()
+            else if (today.DayOfWeek.ToString() == "Monday")
+            {
                 SqlDataAdapter sql = new SqlDataAdapter("SELECT nazwaPromocji FROM Promocja WHERE idPromocja = 2 ", cnn);
                 DataTable sale = new DataTable();
                 sql.Fill(sale);
                 dataGridView3.DataSource = sale;
 
-                /*string wartosc;
-                wartosc = (string)dataGridView3.Rows[0].Cells[0].Value;
-                if(wartosc == "Tanie poniedzialki")
-                {
-
-                }*/
             }
             dataGridView3.ClearSelection();
             cnn.Close();
@@ -130,12 +126,30 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {   //sprawdzenie godziny
+        {
+            decimal salePrice = 0;
+            var today = DateTime.Now.Date;
+
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                salePrice = decimal.Parse(textBox1.Text);
+            }
+
+
+
+            //sprawdzenie godziny
             int hour = DateTime.Now.Hour;
             if (hour >= 12 && hour < 21)
-            {   
+            {
                 if (totalPrice > 20)
                 {
+                    //Sprawdzenie czy poniedziałek i naliczenie zniżki
+                    if (today.DayOfWeek.ToString() == "Monday")
+                    {
+                        setTotalPrice(salePrice);
+                        totalPrice = decimal.Parse(textBox1.Text);
+                    }
+
                     if (totalPrice > 200)
                     {
                         MessageBox.Show("Gratuluje twoja dostawa będzie darmowa!");
@@ -148,7 +162,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {
                     MessageBox.Show("Nie przyjmujemy zamówień poniżej 20 zł!");
                 }
-            }else
+            }
+            else
             {
                 MessageBox.Show("Przykro nam ale restauracja jest zamknięta! Zapraszamy codziennie w godzinach: 12-21");
             }
