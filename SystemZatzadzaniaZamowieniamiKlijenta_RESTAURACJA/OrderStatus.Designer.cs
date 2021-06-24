@@ -54,7 +54,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(542, 235);
+            this.startButton.Location = new System.Drawing.Point(417, 214);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(205, 64);
             this.startButton.TabIndex = 1;
@@ -74,9 +74,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // statusText
             // 
             this.statusText.AutoSize = true;
-            this.statusText.Location = new System.Drawing.Point(260, 147);
+            this.statusText.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusText.Location = new System.Drawing.Point(90, 124);
             this.statusText.Name = "statusText";
-            this.statusText.Size = new System.Drawing.Size(50, 20);
+            this.statusText.Size = new System.Drawing.Size(81, 35);
             this.statusText.TabIndex = 3;
             this.statusText.Text = "label2";
             this.statusText.Click += new System.EventHandler(this.statusText_Click);
@@ -85,7 +86,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 451);
+            this.ClientSize = new System.Drawing.Size(668, 318);
             this.Controls.Add(this.statusText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startButton);

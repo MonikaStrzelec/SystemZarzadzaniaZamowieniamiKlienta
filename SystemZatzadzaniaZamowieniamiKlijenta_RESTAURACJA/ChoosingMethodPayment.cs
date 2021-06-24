@@ -23,10 +23,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
             InitializeComponent();
-            
+
 
         }
-       
+
 
         private void button2_Click(object sender, EventArgs e)
         {   //wywołanie STRONY GŁOWNEJ
@@ -70,19 +70,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
 
 
-
-
             foreach (Klient client in clientListOK)
             {
                 //DODANIE DO BAZY DANYCH
                 string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
                 SqlConnection cnn = new SqlConnection(connectionString);
                 cnn.Open();
+
                 //dodawanie do bazy
-                SqlDataAdapter sqlKlient = new SqlDataAdapter("INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES(@id, @imie, @nazwisko, @email, @nrtelefonu)", cnn);
+                SqlDataAdapter sqlKlient = new SqlDataAdapter("INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @id, @imie, @nazwisko, @email, @nrtelefonu)", cnn);
                 string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
                 SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
-                SqlDataReader dataReader = cmd1.ExecuteReader();
+                SqlDataReader dataReader = cmd1.ExecuteReader(); //uruchamianie zapytania
                 int output1 = 0;
                 while (dataReader.Read())
                 {
@@ -97,23 +96,29 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 SqlCommand cmd = new SqlCommand(sqlKlient.ToString(), cnn);
                 cmd.Parameters.Add("@idKlient", SqlDbType.Int);
                 cmd.Parameters["@idKlient"].Value = output1;
+
                 cmd.Parameters.Add("@imie", SqlDbType.NChar);
                 cmd.Parameters["@status"].Value = client.Imie;
+
                 cmd.Parameters.Add("@nazwisko", SqlDbType.NChar);
                 cmd.Parameters["@nazwisko"].Value = client.Nazwisko;
+
                 cmd.Parameters.Add("@email", SqlDbType.NChar);
                 cmd.Parameters["@email"].Value = client.Email;
+
                 cmd.Parameters.Add("@nrtelefonu", SqlDbType.NChar);
                 cmd.Parameters["@nrtelefonu"].Value = client.Nrtelefonu;
+
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+
                 foreach (Adresy adresy in customerAddressListOK)
                 {
                     string connectionString2 = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
                     SqlConnection cnn2 = new SqlConnection(connectionString2);
                     cnn2.Open();
                     //dodawanie do bazy
-                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdresy, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (NULL, imie, nazwisko, email, nrtelefonu)", cnn2);
+                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdresy, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)", cnn2);
                     string sqlAdresy2 = "SELECT COUNT(*), MAX([id]) FROM Adresy";
                     SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn2);
                     SqlDataReader dataReader2 = cmd4.ExecuteReader();
@@ -144,20 +149,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cmd3.Parameters.Add("@numerMieszkania", SqlDbType.VarChar);
                     cmd3.Parameters["@numerMieszkania"].Value = adresy.NumerMieszkania;
 
-                    cmd3.Parameters.Add("@id_Seat", SqlDbType.VarChar);
-                    cmd3.Parameters["@id_Seat"].Value = adresy.KodPocztowy;
-
                     cmd3.Parameters.Add("@kodPocztowy", SqlDbType.VarChar);
-                    cmd3.Parameters["@kodPocztowy"].Value = adresy.Miasto;
+                    cmd3.Parameters["@kodPocztowy"].Value = adresy.KodPocztowy;
+
+                    cmd3.Parameters.Add("@miasto", SqlDbType.VarChar);
+                    cmd3.Parameters["@miasto"].Value = adresy.Miasto;
                     cmd3.ExecuteNonQuery();
                     cmd3.Dispose();
 
                 }
-                cnn.Close();
             }
-
-
         }
+
 
         private void label8_Click(object sender, EventArgs e)
         {

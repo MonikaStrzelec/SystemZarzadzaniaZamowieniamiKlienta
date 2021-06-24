@@ -22,6 +22,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             InitializeComponent();
             StartTimer();
+            statusText.Text = "";
         }
 
         public void StartTimer()
