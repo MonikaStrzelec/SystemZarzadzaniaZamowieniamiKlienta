@@ -19,11 +19,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private List<Adresy> customerAddressListOK;
         decimal totalPrice = 0;
         public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
-        {
+        {            
+            InitializeComponent();
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
-            InitializeComponent();
-
 
         }
 
@@ -78,7 +77,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 cnn.Open();
 
                 //dodawanie do bazy
-                SqlDataAdapter sqlKlient = new SqlDataAdapter("INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @id, @imie, @nazwisko, @email, @nrtelefonu)", cnn);
+                string sqlKlient = "INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @id, @imie, @nazwisko, @email, @nrtelefonu)";
                 string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
                 SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
                 SqlDataReader dataReader = cmd1.ExecuteReader(); //uruchamianie zapytania
@@ -93,9 +92,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 cmd1.Cancel();
                 dataReader.Close();
 
-                SqlCommand cmd = new SqlCommand(sqlKlient.ToString(), cnn);
+                SqlCommand cmd = new SqlCommand(sqlKlient, cnn);
                 cmd.Parameters.Add("@idKlient", SqlDbType.Int);
-                cmd.Parameters["@idKlient"].Value = output1;
+                cmd.Parameters["@idKlient"].Value = 3;
 
                 cmd.Parameters.Add("@imie", SqlDbType.NChar);
                 cmd.Parameters["@status"].Value = client.Imie;

@@ -40,9 +40,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             //Usuwanie starszych zamówień niż 3 miesiące
             //Kaskadowo również klientów i pozycji zamówienia
             string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            string sqlQuery = null;
+            
             SqlConnection cnn = new SqlConnection(connectionString);
-            SqlDataAdapter adapter = new SqlDataAdapter();
+           
             cnn.Open();
 
             try
