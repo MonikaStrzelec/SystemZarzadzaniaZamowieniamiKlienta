@@ -10,6 +10,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
     public partial class ChoosingMethodPayment : Form
     {
+        //public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
+        //{
+        //    InitializeComponent();
+        //}
         public ChoosingMethodPayment()
         {
             InitializeComponent();

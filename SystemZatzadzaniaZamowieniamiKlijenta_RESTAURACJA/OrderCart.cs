@@ -18,18 +18,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Klient> clientList = new List<Klient>();
         List<Adresy> customerAddressList = new List<Adresy>();
-
-
         decimal totalPrice = 0;
         public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
         {
             InitializeComponent();
-
             int id = 0, idRow = 0;
             textBox1.Text = totalPrice.ToString();
             foreach (Danie d in listOfTheDishes)
             {
-
                 dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
                 id = d.IdDanie;
                 foreach (PozycjaZamowienia o in orderItemList)
@@ -67,153 +63,172 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button5_Click(object sender, EventArgs e)
         {
-
-            //WALIDACJA adres
-            if (string.IsNullOrWhiteSpace(userAddressStreet.Text))
-            {
-                MessageBox.Show("Musisz wpisać adres");
-            } else
-            {
-                if (userAddressStreet.Text.Length < 3)
+            try 
+            { 
+                //WALIDACJA adres
+                if (string.IsNullOrWhiteSpace(userAddressStreet.Text))
                 {
-                    MessageBox.Show("Sprawdź swój adres, jest za krótki");
-                } else if (userAddressStreet.MaxLength > 50)
-                {
-                    MessageBox.Show("Sprawdź swój adres, jest za długi");
+                    MessageBox.Show("Musisz wpisać adres");
                 } else
                 {
-                    validationTextNoSpecialCharacters(userAddressStreet);
+                    if (userAddressStreet.Text.Length < 3)
+                    {
+                        MessageBox.Show("Sprawdź swój adres, jest za krótki");
+                    } else if (userAddressStreet.MaxLength > 50)
+                    {
+                        MessageBox.Show("Sprawdź swój adres, jest za długi");
+                    } else
+                    {
+                        validationTextNoSpecialCharacters(userAddressStreet);
+                    }
                 }
-            }
-            
-
-            //WALIDACJA numer ulicy
-            if (string.IsNullOrWhiteSpace(userAddressStreetNumber.Text))
-            {
-                MessageBox.Show("Musisz wpisać numer ulicy");
-            } else if (userAddressStreetNumber.MaxLength < 7)
-            { 
-                MessageBox.Show("Sprawdź swój numer ulicy, chyba jest za długi"); 
-            } else
-            {
-                validationTextNoSpecialCharacters(userAddressStreetNumber);
-            }
-
-
-            //WALIDACJA kod pocztowy
-            if (string.IsNullOrWhiteSpace(userAddressPostalCode.Text))
-            {
-                MessageBox.Show("Musisz wpisać kod pocztowy");
-            } else if (userAddressPostalCode.Text.Length > 5 && userAddressPostalCode.MaxLength <= 7)
-            {
-                MessageBox.Show("Czy na pewno wprowadziłeś poprawny kod pocztowy?");
-            } else
-            {
-                validationTextNoSpecialCharacters(userAddressPostalCode);
-            }
-
-
-            //WALIDACJA miasto
-            if (string.IsNullOrWhiteSpace(userAddressCity.Text))
-            {
-                MessageBox.Show("Musisz wpisać miasto");
-                userAddressCity.Focus();
-                return;
-            } else
-            {
-                string city = "Łódź";
-                string city2 = "lodz";
-                if (!(userAddressCity.Text.Equals(city) || userAddressCity.Text.Equals(city2)) == true)
+                //WALIDACJA numer ulicy
+                if (string.IsNullOrWhiteSpace(userAddressStreetNumber.Text))
                 {
-                    MessageBox.Show("Przykro nam ale nie obsługujemy dostawy po za Łodzią :( ");
-                    this.Close();
-                    Home openForm2 = new Home();
-                    openForm2.ShowDialog();
-                }
-            }
-
-
-            //WALIDACJA imię
-            if (string.IsNullOrWhiteSpace(userName.Text))
-            {
-                MessageBox.Show("Musisz wpisać swoje imię");
-            } else if (userName.Text.Length > 5 && userName.MaxLength <= 20)
-            { 
-                MessageBox.Show("Czy na pewno wpisałeś poprawnie swoje imię?");
-            } else
-            {
-                validationTextNoSpecialCharacters(userName);
-                validationTextWithoutTheNumber(userName);
-            }
-
-
-            //WALIDACJA nazwisko
-            if (string.IsNullOrWhiteSpace(userFamilyName.Text))
-            {
-                MessageBox.Show("Musisz wpisać swoje nazwisko");
-            } else if (userFamilyName.Text.Length > 5 && userFamilyName.MaxLength <= 20)
-            {
-                MessageBox.Show("Czy na pewno wpisałeś poprawnie nazwisko?");
-            } else
-            {
-                validationTextNoSpecialCharacters(userFamilyName);
-                validationTextWithoutTheNumber(userFamilyName);
-            }
-
-
-            //WALIDACJA e-mail
-            if (string.IsNullOrWhiteSpace(userEmail.Text))
-            {
-                MessageBox.Show("Musisz wpisać e-mail");
-            } else if (userEmail.Text.Length > 5)
-            {
-                MessageBox.Show("Czy na pewno wprowadziłeś poprawny email?");
-            } else
-            {
-                if (!this.userEmail.Text.Contains('@') || !this.userEmail.Text.Contains('.'))
+                    MessageBox.Show("Musisz wpisać numer ulicy");
+                } else if (userAddressStreetNumber.MaxLength < 7)
+                { 
+                    MessageBox.Show("Sprawdź swój numer ulicy, chyba jest za długi"); 
+                } else
                 {
-                    MessageBox.Show("Wprowadź poprawny adres email", "Niepoprawny adres email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    validationTextNoSpecialCharacters(userAddressStreetNumber);
                 }
-                return;
-            }
 
 
-            //WALIDACJA numer telefonu
-            if (string.IsNullOrWhiteSpace(numericuserPhoneNumber.Text))
-            {
-                MessageBox.Show("Musisz wpisać numer telefonu");
-                if (userAddressPostalCode.Text.Length > 7 && userAddressPostalCode.MaxLength <= 9)
+                //WALIDACJA kod pocztowy
+                if (string.IsNullOrWhiteSpace(userAddressPostalCode.Text))
                 {
-                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny numer telefonu?");
+                    MessageBox.Show("Musisz wpisać kod pocztowy");
+                } else if (userAddressPostalCode.Text.Length > 5 && userAddressPostalCode.MaxLength <= 7)
+                {
+                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny kod pocztowy?");
+                } else
+                {
+                    validationTextNoSpecialCharacters(userAddressPostalCode);
                 }
-                return;
+
+
+                //WALIDACJA miasto
+                if (string.IsNullOrWhiteSpace(userAddressCity.Text))
+                {
+                    MessageBox.Show("Musisz wpisać miasto");
+                    userAddressCity.Focus();
+                    return;
+                } else
+                {
+                    string city = "Łódź";
+                    string city2 = "lodz";
+                    if (!(userAddressCity.Text.Equals(city) || userAddressCity.Text.Equals(city2)) == true)
+                    {
+                        MessageBox.Show("Przykro nam ale nie obsługujemy dostawy po za Łodzią :( ");
+                        this.Close();
+                        Home openForm2 = new Home();
+                        openForm2.ShowDialog();
+                    }
+                }
+
+
+                //WALIDACJA imię
+                if (string.IsNullOrWhiteSpace(userName.Text))
+                {
+                    MessageBox.Show("Musisz wpisać swoje imię");
+                } else if (userName.Text.Length > 5 && userName.MaxLength <= 20)
+                { 
+                    MessageBox.Show("Czy na pewno wpisałeś poprawnie swoje imię?");
+                } else
+                {
+                    validationTextNoSpecialCharacters(userName);
+                    validationTextWithoutTheNumber(userName);
+                }
+
+
+                //WALIDACJA nazwisko
+                if (string.IsNullOrWhiteSpace(userFamilyName.Text))
+                {
+                    MessageBox.Show("Musisz wpisać swoje nazwisko");
+                } else if (userFamilyName.Text.Length > 5 && userFamilyName.MaxLength <= 20)
+                {
+                    MessageBox.Show("Czy na pewno wpisałeś poprawnie nazwisko?");
+                } else
+                {
+                    validationTextNoSpecialCharacters(userFamilyName);
+                    validationTextWithoutTheNumber(userFamilyName);
+                }
+
+
+                //WALIDACJA e-mail
+                if (string.IsNullOrWhiteSpace(userEmail.Text))
+                {
+                    MessageBox.Show("Musisz wpisać e-mail");
+                } else if (userEmail.Text.Length > 5)
+                {
+                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny email?");
+                } else
+                {
+                    if (!this.userEmail.Text.Contains('@') || !this.userEmail.Text.Contains('.'))
+                    {
+                        MessageBox.Show("Wprowadź poprawny adres email", "Niepoprawny adres email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+
+
+                //WALIDACJA numer telefonu
+                if (string.IsNullOrWhiteSpace(numericuserPhoneNumber.Text))
+                {
+                    MessageBox.Show("Musisz wpisać numer telefonu");
+                    if (userAddressPostalCode.Text.Length > 7 && userAddressPostalCode.MaxLength <= 9)
+                    {
+                        MessageBox.Show("Czy na pewno wprowadziłeś poprawny numer telefonu?");
+                    }
+                    return;
+                }
+
+                //ZAPISANIE DANYCH użytkownika
+                Klient customer = new Klient();
+                Adresy addressCustomer = new Adresy();
+                int id = 0;
+
+                customer.Imie = userName.Text;
+                customer.Nazwisko = userFamilyName.Text;
+                customer.Email = userEmail.Text;
+                customer.Nrtelefonu = (int)numericuserPhoneNumber.Value;
+
+                customer.IdKlient = id;
+                addressCustomer.IdKlient = id;
+
+                addressCustomer.Ulica = userAddressStreet.Text;
+                addressCustomer.NumerDomu = userAddressStreetNumber.Text;
+                addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
+                addressCustomer.KodPocztowy = userAddressPostalCode.Text;
+                addressCustomer.Miasto = userAddressCity.Text;
+
+                clientList.Add(customer);
+                customerAddressList.Add(addressCustomer);
+
+                
+                
+                
+                //DODANIE DO BAZY DANYCH
+                string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+                SqlConnection cnn = new SqlConnection(connectionString);
+                cnn.Open();
+                //dodawanie do bazy
+                SqlDataAdapter sql = new SqlDataAdapter("INSERT Klient VALUES(NULL, imie, nazwisko, email, nrtelefonu)", cnn);
+                SqlDataAdapter sql2 = new SqlDataAdapter("INSERT Adresy VALUES(NULL, imie, nazwisko, email, nrtelefonu)", cnn);
+                DataTable users = new DataTable();
+                sql.Fill(users);
+                cnn.Close();
+
+
+                //wywołanie WYBORU SPOSOBU ZAPŁATY
+                //ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
+                ChoosingMethodPayment openForm = new ChoosingMethodPayment();
+                openForm.ShowDialog();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
-
-            //ZAPISANIE DANYCH użytkownika
-            Klient customer = new Klient();
-            Adresy addressCustomer = new Adresy();
-            int id = 0;
-
-            customer.Imie = userName.Text;
-            customer.Nazwisko = userFamilyName.Text;
-            customer.Email = userEmail.Text;
-            customer.Nrtelefonu = (int)numericuserPhoneNumber.Value;
-
-            customer.IdKlient = id;
-            addressCustomer.IdKlient = id;
-
-            addressCustomer.Ulica = userAddressStreet.Text;
-            addressCustomer.NumerDomu = userAddressStreetNumber.Text;
-            addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
-            addressCustomer.KodPocztowy = userAddressPostalCode.Text;
-            addressCustomer.Miasto = userAddressCity.Text;
-
-            clientList.Add(customer);
-            customerAddressList.Add(addressCustomer);
-
-            //wywołanie WYBORU SPOSOBU ZAPŁATY
-            ChoosingMethodPayment openForm = new ChoosingMethodPayment();
-            openForm.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
