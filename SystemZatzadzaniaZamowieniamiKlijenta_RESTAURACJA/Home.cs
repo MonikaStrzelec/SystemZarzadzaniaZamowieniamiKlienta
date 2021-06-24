@@ -31,6 +31,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 totalPrice = decimal.Parse(textBox1.Text);
             }
+
+            textBox2.Text = "7";
         }
 
         public decimal setTotalPrice(decimal totalPrice)
@@ -127,7 +129,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button5_Click(object sender, EventArgs e)
         {
-            decimal salePrice = 0;
+            decimal salePrice = 0, dostawa = 7;
             var today = DateTime.Now.Date;
 
             if (!string.IsNullOrEmpty(textBox1.Text))
@@ -143,6 +145,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 if (totalPrice > 20)
                 {
+                    
                     //Sprawdzenie czy poniedziałek i naliczenie zniżki
                     if (today.DayOfWeek.ToString() == "Monday")
                     {
@@ -151,8 +154,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     }
 
                     if (totalPrice > 200)
-                    {
+                    {                       
                         MessageBox.Show("Gratuluje twoja dostawa będzie darmowa!");
+                        //totalPrice = totalPrice - dostawa;
+                    }
+                    else
+                    {
+                        totalPrice = totalPrice + dostawa;
                     }
                     //Przejście do koszyka i wrzucenie listy zamówień
                     OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
