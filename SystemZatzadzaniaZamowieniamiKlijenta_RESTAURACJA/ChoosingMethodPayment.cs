@@ -4,20 +4,29 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
     public partial class ChoosingMethodPayment : Form
     {
-        //public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
+        private List<Klient> clientListOK;
+        private List<Adresy> customerAddressListOK;
+        public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
+        {
+            clientListOK = clientList;
+            customerAddressListOK = customerAddressList;
+            InitializeComponent();
+        }
+        //public ChoosingMethodPayment()
         //{
         //    InitializeComponent();
         //}
-        public ChoosingMethodPayment()
-        {
-            InitializeComponent();
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {   //wywołanie STRONY GŁOWNEJ
@@ -59,6 +68,95 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {//brak zaznaczonej płatności
                 DialogResult result = MessageBox.Show("Musisz wybrać petodę płatności!", "Confirmation", MessageBoxButtons.YesNo);
             }
+
+
+
+
+            foreach (Klient client in clientListOK)
+            {
+                //DODANIE DO BAZY DANYCH
+                string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+                SqlConnection cnn = new SqlConnection(connectionString);
+                cnn.Open();
+                //dodawanie do bazy
+                SqlDataAdapter sqlKlient = new SqlDataAdapter("INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES(@id, @imie, @nazwisko, @email, @nrtelefonu)", cnn);
+                string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
+                SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
+                SqlDataReader dataReader = cmd1.ExecuteReader();
+                int output1 = 0;
+                while (dataReader.Read())
+                {
+                    if ((int)dataReader.GetValue(0) != 0)
+                    {
+                        output1 = Convert.ToInt32(dataReader.GetValue(1)) + 1;
+                    }
+                }
+                cmd1.Cancel();
+                dataReader.Close();
+
+                SqlCommand cmd = new SqlCommand(sqlKlient.ToString(), cnn);
+                cmd.Parameters.Add("@idKlient", SqlDbType.Int);
+                cmd.Parameters["@idKlient"].Value = output1;
+                cmd.Parameters.Add("@imie", SqlDbType.NChar);
+                cmd.Parameters["@status"].Value = client.Imie;
+                cmd.Parameters.Add("@nazwisko", SqlDbType.NChar);
+                cmd.Parameters["@nazwisko"].Value = client.Nazwisko;
+                cmd.Parameters.Add("@email", SqlDbType.NChar);
+                cmd.Parameters["@email"].Value = client.Email;
+                cmd.Parameters.Add("@nrtelefonu", SqlDbType.NChar);
+                cmd.Parameters["@nrtelefonu"].Value = client.Nrtelefonu;
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                foreach (Adresy adresy in customerAddressListOK)
+                {
+                    string connectionString2 = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+                    SqlConnection cnn2 = new SqlConnection(connectionString2);
+                    cnn2.Open();
+                    //dodawanie do bazy
+                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdresy, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (NULL, imie, nazwisko, email, nrtelefonu)", cnn2);
+                    string sqlAdresy2 = "SELECT COUNT(*), MAX([id]) FROM Adresy";
+                    SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn2);
+                    SqlDataReader dataReader2 = cmd4.ExecuteReader();
+                    int output2 = 0;
+                    while (dataReader2.Read())
+                    {
+                        if ((int)dataReader2.GetValue(0) != 0)
+                        {
+                            output2 = Convert.ToInt32(dataReader2.GetValue(1)) + 1;
+                        }
+                    }
+                    cmd1.Cancel();
+                    dataReader2.Close();
+
+                    SqlCommand cmd3 = new SqlCommand(sqlAdresy.ToString(), cnn2);
+                    cmd3.Parameters.Add("@idAdresy", SqlDbType.Int);
+                    cmd3.Parameters["@idAdresy"].Value = output2;
+
+                    cmd3.Parameters.Add("idKlient", SqlDbType.Int);
+                    cmd3.Parameters["@idKlient"].Value = output1;
+
+                    cmd3.Parameters.Add("@ulica", SqlDbType.VarChar);
+                    cmd3.Parameters["@ulica"].Value = adresy.Ulica;
+
+                    cmd3.Parameters.Add("@numerDomu", SqlDbType.VarChar);
+                    cmd3.Parameters["@numerDomu"].Value = adresy.NumerDomu;
+
+                    cmd3.Parameters.Add("@numerMieszkania", SqlDbType.VarChar);
+                    cmd3.Parameters["@numerMieszkania"].Value = adresy.NumerMieszkania;
+
+                    cmd3.Parameters.Add("@id_Seat", SqlDbType.VarChar);
+                    cmd3.Parameters["@id_Seat"].Value = adresy.KodPocztowy;
+
+                    cmd3.Parameters.Add("@kodPocztowy", SqlDbType.VarChar);
+                    cmd3.Parameters["@kodPocztowy"].Value = adresy.Miasto;
+                    cmd3.ExecuteNonQuery();
+                    cmd3.Dispose();
+
+                }
+                cnn.Close();
+            }
+
+
         }
 
         private void label8_Click(object sender, EventArgs e)
