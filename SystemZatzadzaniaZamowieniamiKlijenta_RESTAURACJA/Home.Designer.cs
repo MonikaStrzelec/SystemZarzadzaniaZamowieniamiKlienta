@@ -58,8 +58,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label7 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+=======
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -72,8 +75,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+<<<<<<< HEAD
             this.button1.Location = new System.Drawing.Point(9, 478);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+=======
+            this.button1.Location = new System.Drawing.Point(10, 706);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 45);
             this.button1.TabIndex = 0;
@@ -197,9 +204,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // LabelStatus
             // 
             this.LabelStatus.AutoSize = true;
+<<<<<<< HEAD
             this.LabelStatus.Location = new System.Drawing.Point(10, 350);
             this.LabelStatus.Name = "LabelStatus";
             this.LabelStatus.Size = new System.Drawing.Size(38, 15);
+=======
+            this.LabelStatus.Location = new System.Drawing.Point(11, 466);
+            this.LabelStatus.Name = "LabelStatus";
+            this.LabelStatus.Size = new System.Drawing.Size(50, 20);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.LabelStatus.TabIndex = 19;
             this.LabelStatus.Text = "label8";
             // 
@@ -278,8 +291,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+<<<<<<< HEAD
             this.button6.Location = new System.Drawing.Point(738, 7);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+=======
+            this.button6.Location = new System.Drawing.Point(925, 62);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(150, 45);
             this.button6.TabIndex = 12;
@@ -313,7 +330,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // button8
             // 
+<<<<<<< HEAD
             this.button8.Location = new System.Drawing.Point(12, 300);
+=======
+            this.button8.Location = new System.Drawing.Point(14, 404);
+            this.button8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(149, 48);
             this.button8.TabIndex = 14;
@@ -323,7 +345,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // numericUpDown1
             // 
+<<<<<<< HEAD
             this.numericUpDown1.Location = new System.Drawing.Point(32, 445);
+=======
+            this.numericUpDown1.Location = new System.Drawing.Point(28, 591);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10,
             0,
@@ -346,7 +373,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // label7
             // 
             this.label7.AutoSize = true;
+<<<<<<< HEAD
             this.label7.Location = new System.Drawing.Point(32, 410);
+=======
+            this.label7.Location = new System.Drawing.Point(18, 566);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(128, 15);
             this.label7.TabIndex = 16;
@@ -354,7 +385,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // button9
             // 
+<<<<<<< HEAD
             this.button9.Location = new System.Drawing.Point(11, 354);
+=======
+            this.button9.Location = new System.Drawing.Point(13, 479);
+            this.button9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(150, 53);
             this.button9.TabIndex = 18;
@@ -365,8 +401,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // button7
             // 
             this.button7.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+<<<<<<< HEAD
             this.button7.Location = new System.Drawing.Point(10, 251);
             this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+=======
+            this.button7.Location = new System.Drawing.Point(11, 324);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(150, 44);
             this.button7.TabIndex = 13;
@@ -374,6 +414,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+<<<<<<< HEAD
             // panel3
             // 
             this.panel3.Controls.Add(this.dataGridView3);
@@ -391,6 +432,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.Text = "dataGridView3";
             // 
+=======
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);

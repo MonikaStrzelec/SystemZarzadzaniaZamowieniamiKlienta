@@ -23,10 +23,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         public Home()
         {
             InitializeComponent();
-
             refresh();
+<<<<<<< HEAD
             setDGVWidth();
 
+=======
+            timerStatus();
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
 
             //Przypisanie wartości kwoty całkowitej
             if (!String.IsNullOrEmpty(textBox1.Text))
@@ -208,7 +211,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OrderStatusTrue openForm = new OrderStatusTrue();
+            OrderCart openForm = new OrderCart();
             openForm.ShowDialog();
         }
 
@@ -263,6 +266,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
                     
 
+<<<<<<< HEAD
+=======
+                //Zliczanie jednostkowej ceny całkowitej
+                priceAfterAdding = dish.CenaDania * orderItem.IloscKonkretnegoDania;
+                totalPrice = priceFromTextBox + priceAfterAdding;
+                textBox1.Text = totalPrice.ToString();
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
             }
         }
 
@@ -272,10 +282,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 totalPrice = decimal.Parse(textBox1.Text);
             }
-           
             int amount = 0, amountToDelete = 0, index = 0;
 
             if (dataGridView2.SelectedRows.Count > 0)
+<<<<<<< HEAD
             {
                 //Pobranie danych dania wybranego przez klienta
                 if (dataGridView2.SelectedCells[0].Value == null)
@@ -283,6 +293,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     MessageBox.Show("Próbujesz usunąć pustą pozycję!");
                 }
                 else
+=======
+            {   //Pobranie danych dania wybranego przez klienta
+                try
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
                 {
 
                     try
@@ -299,9 +313,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
                         priceAfterDeleting = priceOfTheDish * amountToDelete;
 
+<<<<<<< HEAD
                         newTotalPrice = totalPrice - priceAfterDeleting;
                         textBox1.Text = newTotalPrice.ToString();
 
+=======
+                    //Usunięcie wybranego dania z listy
+                    for (int i = 0; i < listOfTheDishes.Count; i++)
+                    {
+                        index = listOfTheDishes.FindIndex(a => a.NazwaDania == chosenDish);
+                        newTotalPrice = listOfTheDishes[index].CenaDania;
+                        amount = orderItemList[index].IloscKonkretnegoDania;
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
 
                         //Usunięcie wybranego dania z listy
                         for (int i = 0; i < listOfTheDishes.Count; i++)
@@ -317,12 +340,16 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                         //Usunięcie dania z koszyka
                         try
                         {
+<<<<<<< HEAD
                             int restAmount = (int)dataGridView2.SelectedCells[2].Value;
                             if (restAmount == 0)
                             {
                                 dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
 
                             }
+=======
+                            dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows[0].Index);
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
                         }
                         catch (Exception ex)
                         {
@@ -334,6 +361,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     {
                         MessageBox.Show("Wybrano pustą pozycję!");
                     }
+<<<<<<< HEAD
                 }
 
 
@@ -342,6 +370,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
 
 
+=======
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Wybrano pustą pozycję!");
+                }
+            }
+>>>>>>> 70c6476fa862990d5b122d2fbb5e645d01776ada
         }
 
         private void button4_Click(object sender, EventArgs e)
