@@ -33,6 +33,32 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
 
             textBox2.Text = "7";
+            deleteOldClients();
+        }
+
+        void deleteOldClients()
+        {
+            //Usuwanie starszych zamówień niż 3 miesiące
+            //Kaskadowo również klientów i pozycji zamówienia
+            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+            string sqlQuery = null;
+            SqlConnection cnn = new SqlConnection(connectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            cnn.Open();
+
+            try
+            {
+                SqlCommand query = new SqlCommand("DELETE FROM Zamowienie WHERE statusZamowienia = 'dostarczone' AND DATEDIFF(DD, dataZamowienia, GETDATE()) > 90", cnn);
+                query.ExecuteNonQuery();
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+           
+            cnn.Close();
         }
 
         public decimal setTotalPrice(decimal totalPrice)
