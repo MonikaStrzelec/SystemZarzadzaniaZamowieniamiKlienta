@@ -18,12 +18,47 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private List<Klient> clientListOK;
         private List<Adresy> customerAddressListOK;
         decimal totalPrice = 0;
+
+        static string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+        SqlConnection cnn = new SqlConnection(connectionString);
         public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList)
         {            
             InitializeComponent();
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
 
+
+            /*            
+            cnn.Open();
+            SqlCommand comm = new SqlCommand("INSERT INTO Klient (idKlient,imie,nazwisko, email, nrtelefonu) " + " VALUES(3,'Karol', 'Krawczyl', 'miodowe@gmail.com',500600500)", cnn);
+
+
+            comm.ExecuteNonQuery();
+            cnn.Close(); */
+
+            /*
+            string sqlKlient = "INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @idKlient, @imie, @nazwisko, @email, @nrtelefonu)";
+
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand(sqlKlient, cnn);
+            cmd.Parameters.Add("@idKlient", SqlDbType.Int);
+            cmd.Parameters["@idKlient"].Value = 4;
+
+            cmd.Parameters.Add("@imie", SqlDbType.NChar);
+            cmd.Parameters["@imie"].Value = "Anna";
+
+            cmd.Parameters.Add("@nazwisko", SqlDbType.NChar);
+            cmd.Parameters["@nazwisko"].Value = "Krawczyk";
+
+            cmd.Parameters.Add("@email", SqlDbType.NChar);
+            cmd.Parameters["@email"].Value = "annkraw@gmail.com";
+
+            cmd.Parameters.Add("@nrtelefonu", SqlDbType.NChar);
+            cmd.Parameters["@nrtelefonu"].Value = 500400500;
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cnn.Close();*/
         }
 
 
@@ -72,12 +107,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             foreach (Klient client in clientListOK)
             {
                 //DODANIE DO BAZY DANYCH
-                string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-                SqlConnection cnn = new SqlConnection(connectionString);
+               
                 cnn.Open();
 
                 //dodawanie do bazy
-                string sqlKlient = "INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @id, @imie, @nazwisko, @email, @nrtelefonu)";
+                string sqlKlient = "INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES ( @idKlient, @imie, @nazwisko, @email, @nrtelefonu)";
                 string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
                 SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
                 SqlDataReader dataReader = cmd1.ExecuteReader(); //uruchamianie zapytania
@@ -92,12 +126,14 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 cmd1.Cancel();
                 dataReader.Close();
 
+                             
+
                 SqlCommand cmd = new SqlCommand(sqlKlient, cnn);
                 cmd.Parameters.Add("@idKlient", SqlDbType.Int);
                 cmd.Parameters["@idKlient"].Value = 3;
 
                 cmd.Parameters.Add("@imie", SqlDbType.NChar);
-                cmd.Parameters["@status"].Value = client.Imie;
+                cmd.Parameters["@imie"].Value = client.Imie;
 
                 cmd.Parameters.Add("@nazwisko", SqlDbType.NChar);
                 cmd.Parameters["@nazwisko"].Value = client.Nazwisko;
@@ -117,7 +153,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     SqlConnection cnn2 = new SqlConnection(connectionString2);
                     cnn2.Open();
                     //dodawanie do bazy
-                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdresy, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)", cnn2);
+                    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdres, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (@idAdres, @idKlient, @ulica, @numerDomu, @numerMieszkania, @kodPocztowy, @miasto)", cnn2);
                     string sqlAdresy2 = "SELECT COUNT(*), MAX([id]) FROM Adresy";
                     SqlCommand cmd4 = new SqlCommand(sqlAdresy2, cnn2);
                     SqlDataReader dataReader2 = cmd4.ExecuteReader();
@@ -133,8 +169,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     dataReader2.Close();
 
                     SqlCommand cmd3 = new SqlCommand(sqlAdresy.ToString(), cnn2);
-                    cmd3.Parameters.Add("@idAdresy", SqlDbType.Int);
-                    cmd3.Parameters["@idAdresy"].Value = output2;
+                    cmd3.Parameters.Add("@idAdres", SqlDbType.Int);
+                    cmd3.Parameters["@idAdres"].Value = output2;
 
                     cmd3.Parameters.Add("idKlient", SqlDbType.Int);
                     cmd3.Parameters["@idKlient"].Value = output1;

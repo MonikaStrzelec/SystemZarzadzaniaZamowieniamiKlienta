@@ -127,26 +127,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
 
 
-                //WALIDACJA miasto
-                if (string.IsNullOrWhiteSpace(userAddressCity.Text))
-                {
-                    MessageBox.Show("Musisz wpisać miasto");
-                    userAddressCity.Focus();
-                    return;
-                }
-                else
-                {
-                    string city = "Łódź";
-                    string city2 = "lodz";
-                    if (!(userAddressCity.Text.Equals(city) || userAddressCity.Text.Equals(city2)) == true)
-                    {
-                        MessageBox.Show("Przykro nam ale nie obsługujemy dostawy po za Łodzią :( ");
-                        this.Close();
-                        Home openForm2 = new Home();
-                        openForm2.ShowDialog();
-                    }
-                }
-
 
                 //WALIDACJA imię
                 if (string.IsNullOrWhiteSpace(userName.Text))
@@ -217,7 +197,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 addressCustomer.NumerDomu = userAddressStreetNumber.Text;
                 addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
                 addressCustomer.KodPocztowy = userAddressPostalCode.Text;
-                addressCustomer.Miasto = userAddressCity.Text;
+                addressCustomer.Miasto = userAddressCity.SelectedIndex.ToString();
 
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
@@ -263,5 +243,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void userAddressPostalCode_TextChanged(object sender, EventArgs e)
         { }
+
+        private void OrderCart_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userAddressCity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

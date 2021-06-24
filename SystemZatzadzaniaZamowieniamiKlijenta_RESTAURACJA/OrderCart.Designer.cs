@@ -42,7 +42,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel2 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.userAddressStreetNumber = new System.Windows.Forms.TextBox();
-            this.userAddressCity = new System.Windows.Forms.TextBox();
             this.userAddressPostalCode = new System.Windows.Forms.TextBox();
             this.userAddressApartmentNumber = new System.Windows.Forms.TextBox();
             this.userAddressStreet = new System.Windows.Forms.TextBox();
@@ -67,6 +66,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.userAddressCity = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -168,9 +168,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.userAddressCity);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.userAddressStreetNumber);
-            this.panel2.Controls.Add(this.userAddressCity);
             this.panel2.Controls.Add(this.userAddressPostalCode);
             this.panel2.Controls.Add(this.userAddressApartmentNumber);
             this.panel2.Controls.Add(this.userAddressStreet);
@@ -182,7 +182,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel2.Location = new System.Drawing.Point(4, 41);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(640, 170);
+            this.panel2.Size = new System.Drawing.Size(653, 170);
             this.panel2.TabIndex = 14;
             // 
             // label15
@@ -201,15 +201,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.userAddressStreetNumber.Name = "userAddressStreetNumber";
             this.userAddressStreetNumber.Size = new System.Drawing.Size(264, 23);
             this.userAddressStreetNumber.TabIndex = 11;
-            // 
-            // userAddressCity
-            // 
-            this.userAddressCity.Location = new System.Drawing.Point(284, 136);
-            this.userAddressCity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.userAddressCity.MaxLength = 50;
-            this.userAddressCity.Name = "userAddressCity";
-            this.userAddressCity.Size = new System.Drawing.Size(280, 23);
-            this.userAddressCity.TabIndex = 10;
             // 
             // userAddressPostalCode
             // 
@@ -448,6 +439,17 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // userAddressCity
+            // 
+            this.userAddressCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userAddressCity.FormattingEnabled = true;
+            this.userAddressCity.Items.AddRange(new object[] {
+            "Łódź"});
+            this.userAddressCity.Location = new System.Drawing.Point(285, 136);
+            this.userAddressCity.Name = "userAddressCity";
+            this.userAddressCity.Size = new System.Drawing.Size(278, 23);
+            this.userAddressCity.TabIndex = 13;
+            // 
             // OrderCart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -463,6 +465,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OrderCart";
             this.Text = "OrderCart";
+            this.Load += new System.EventHandler(this.OrderCart_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -485,7 +488,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox userAddressCity;
         private System.Windows.Forms.TextBox userAddressPostalCode;
         private System.Windows.Forms.TextBox userAddressApartmentNumber;
         private System.Windows.Forms.TextBox userAddressStreet;
@@ -518,5 +520,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cena;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ilosc;
+        private System.Windows.Forms.ComboBox userAddressCity;
     }
 }

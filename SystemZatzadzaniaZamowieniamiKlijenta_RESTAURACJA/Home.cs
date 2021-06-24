@@ -18,7 +18,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
         decimal totalPrice = 0, priceOfTheDish = 0;
         string chosenDish;
-
+        static string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+        SqlConnection cnn = new SqlConnection(connectionString);
         public Home()
         {
             InitializeComponent();
@@ -39,10 +40,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             //Usuwanie starszych zamówień niż 3 miesiące
             //Kaskadowo również klientów i pozycji zamówienia
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            
-            SqlConnection cnn = new SqlConnection(connectionString);
-           
+                      
             cnn.Open();
 
             try
@@ -70,8 +68,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         void refresh()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            SqlConnection cnn = new SqlConnection(connectionString);
+           
             cnn.Open();
 
             dataGridView1.Rows.Clear();
@@ -92,8 +89,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {//Pobranie aktualnego dnia
             var today = DateTime.Now.Date;
 
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            SqlConnection cnn = new SqlConnection(connectionString);
+            
             cnn.Open();
             if (totalPrice > 200)
             {
@@ -212,8 +208,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            SqlConnection cnn = new SqlConnection(connectionString);
+            
             cnn.Open();
             //wyświetlenie całej listy MENU
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie,nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
@@ -358,8 +353,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void button4_Click(object sender, EventArgs e)
         {
             //Wyświetlenie listy przystawek
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            SqlConnection cnn = new SqlConnection(connectionString);
+            
             cnn.Open();
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Przystawka'", cnn);
             DataTable dishes = new DataTable();
@@ -381,8 +375,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-            SqlConnection cnn = new SqlConnection(connectionString);
+            
             cnn.Open();
             //Wyświetlenie listy ramenów            
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Ramen'", cnn);
