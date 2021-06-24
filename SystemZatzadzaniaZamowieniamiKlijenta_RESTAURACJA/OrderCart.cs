@@ -20,9 +20,27 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         List<Adresy> customerAddressList = new List<Adresy>();
 
 
-        public OrderCart()
+        decimal totalPrice = 0;
+        public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
         {
             InitializeComponent();
+
+            int id = 0, idRow = 0;
+            textBox1.Text = totalPrice.ToString();
+            foreach (Danie d in listOfTheDishes)
+            {
+
+                dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
+                id = d.IdDanie;
+                foreach (PozycjaZamowienia o in orderItemList)
+                {
+                    if (o.IdDania == id)
+                    {
+                        idRow = id - 1;
+                        dataGridView1.Rows[idRow].Cells[2].Value = o.IloscKonkretnegoDania;
+                    }
+                }
+            }
         }
 
         public static string validationTextNoSpecialCharacters(TextBox textValidation)

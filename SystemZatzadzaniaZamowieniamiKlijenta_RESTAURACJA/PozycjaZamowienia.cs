@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
-    class PozycjaZamowienia
+    public class PozycjaZamowienia
     {
         int idPromocjeZamowienia, idZamowienie, idDania, idKlient, iloscKonkretnegoDania;
 

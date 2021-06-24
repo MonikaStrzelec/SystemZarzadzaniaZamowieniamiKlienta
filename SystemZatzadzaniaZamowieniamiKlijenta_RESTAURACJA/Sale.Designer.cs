@@ -38,9 +38,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(194, 9);
+            this.label1.Location = new System.Drawing.Point(170, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(370, 46);
+            this.label1.Size = new System.Drawing.Size(296, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "AKTUALNE PROMOCJE:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -48,20 +48,21 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(205, 104);
+            this.dataGridView1.Location = new System.Drawing.Point(90, 62);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(359, 188);
+            this.dataGridView1.Size = new System.Drawing.Size(503, 145);
             this.dataGridView1.TabIndex = 2;
             // 
             // Sale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(700, 338);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Sale";
             this.Text = "Sale";
             this.Load += new System.EventHandler(this.Sale_Load);

@@ -21,6 +21,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
             void refresh()
             {
+            void refresh()
+            {
                 string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
                 SqlConnection cnn = new SqlConnection(connectionString);
                 cnn.Open();
@@ -30,6 +32,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 DataTable sale = new DataTable();
                 sql.Fill(sale);
                 dataGridView1.DataSource = sale;
+
+                //Ustawienie szerokości                
+                dataGridView1.Columns[0].Width = 140;
+                dataGridView1.Columns[1].Width = 370;
+
                 if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows != null)
                 {
                     MessageBox.Show("Aktualnie nie posiadamy żadnych promocji");
@@ -38,6 +45,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 dataGridView1.ClearSelection();
                 cnn.Close();
             }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
