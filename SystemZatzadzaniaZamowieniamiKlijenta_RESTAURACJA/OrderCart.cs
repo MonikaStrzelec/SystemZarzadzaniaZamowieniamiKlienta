@@ -18,16 +18,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Klient> clientList = new List<Klient>();
         List<Adresy> customerAddressList = new List<Adresy>();
+        List<Danie> listOfTheDishes2 = new List<Danie>();
+        List<PozycjaZamowienia> orderItemList2 = new List<PozycjaZamowienia>();
         decimal totalPrice = 0;
         public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
         {
             InitializeComponent();
-            int id = 0, idRow = 0;
+            int idRow = 0;
             textBox1.Text = totalPrice.ToString();
             foreach (Danie d in listOfTheDishes)
             {
                 dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
-                //id = d.IdDanie;
+              
                 foreach (PozycjaZamowienia o in orderItemList)
                 {
                     if (o.IdDania == d.IdDanie)
@@ -35,12 +37,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
                         idRow++;
                         try
-                        {
-                            /*
-                            for(int j=1; j <dataGridView1.Rows.Count;j++)
-                            {
-                                dataGridView1.Rows[j-1].Cells[2].Value = o.IloscKonkretnegoDania;
-                            }*/
+                        {                            
                             dataGridView1.Rows[idRow-1].Cells[2].Value = o.IloscKonkretnegoDania;
                         }
                         catch(Exception ex)
@@ -51,6 +48,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     }
                 }
             }
+
+            listOfTheDishes2 = listOfTheDishes;
+            orderItemList2 = orderItemList2;
         }
 
         public static string validationTextNoSpecialCharacters(TextBox textValidation)
@@ -75,6 +75,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private void label14_Click(object sender, EventArgs e)
         { }
 
+
         private void button5_Click(object sender, EventArgs e)
         {
             try
@@ -83,34 +84,38 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 if (string.IsNullOrWhiteSpace(userAddressStreet.Text))
                 {
                     MessageBox.Show("Musisz wpisać adres");
+                    return;
                 }
                 else
                 {
                     if (userAddressStreet.Text.Length < 3)
                     {
                         MessageBox.Show("Sprawdź swój adres, jest za krótki");
+                        return;
                     }
-                    else if (userAddressStreet.MaxLength > 50)
+                    if (userAddressStreet.MaxLength > 50)
                     {
                         MessageBox.Show("Sprawdź swój adres, jest za długi");
-                    }
-                    else
-                    {
-                        validationTextNoSpecialCharacters(userAddressStreet);
+                        return;
                     }
                 }
+
                 //WALIDACJA numer ulicy
                 if (string.IsNullOrWhiteSpace(userAddressStreetNumber.Text))
                 {
                     MessageBox.Show("Musisz wpisać numer ulicy");
+                    return;
                 }
-                else if (userAddressStreetNumber.MaxLength < 7)
+                if (userAddressStreetNumber.MaxLength < 7)
                 {
                     MessageBox.Show("Sprawdź swój numer ulicy, chyba jest za długi");
+                    return;
                 }
                 else
                 {
-                    validationTextNoSpecialCharacters(userAddressStreetNumber);
+                    //validationTextNoSpecialCharacters(userAddressStreetNumber);
+                    //MessageBox.Show("validationTextNoSpecialCharacters numer domu");
+                    //return;
                 }
 
 
@@ -119,13 +124,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {
                     MessageBox.Show("Musisz wpisać kod pocztowy");
                 }
-                else if (userAddressPostalCode.Text.Length > 5 && userAddressPostalCode.MaxLength <= 7)
-                {
-                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny kod pocztowy?");
-                }
                 else
                 {
-                    validationTextNoSpecialCharacters(userAddressPostalCode);
+                    //validationTextNoSpecialCharacters(userAddressPostalCode);
                 }
 
 
@@ -154,15 +155,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 if (string.IsNullOrWhiteSpace(userName.Text))
                 {
                     MessageBox.Show("Musisz wpisać swoje imię");
+                    return;
                 }
-                else if (userName.Text.Length > 5 && userName.MaxLength <= 20)
+                if (userName.Text.Length > 5 && userName.MaxLength <= 20)
                 {
                     MessageBox.Show("Czy na pewno wpisałeś poprawnie swoje imię?");
-                }
-                else
-                {
-                    validationTextNoSpecialCharacters(userName);
-                    validationTextWithoutTheNumber(userName);
+                    return;
                 }
 
 
@@ -170,15 +168,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 if (string.IsNullOrWhiteSpace(userFamilyName.Text))
                 {
                     MessageBox.Show("Musisz wpisać swoje nazwisko");
+                    return;
                 }
                 else if (userFamilyName.Text.Length > 5 && userFamilyName.MaxLength <= 20)
                 {
                     MessageBox.Show("Czy na pewno wpisałeś poprawnie nazwisko?");
-                }
-                else
-                {
-                    validationTextNoSpecialCharacters(userFamilyName);
-                    validationTextWithoutTheNumber(userFamilyName);
+                    return;
                 }
 
 
@@ -186,29 +181,27 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 if (string.IsNullOrWhiteSpace(userEmail.Text))
                 {
                     MessageBox.Show("Musisz wpisać e-mail");
+                    return;
                 }
-                else if (userEmail.Text.Length > 5)
+                else if (!this.userEmail.Text.Contains('@') || !this.userEmail.Text.Contains('.'))
                 {
-
-                    if (!this.userEmail.Text.Contains('@') || !this.userEmail.Text.Contains('.'))
-                    {
-                        MessageBox.Show("Wprowadź poprawny adres email", "Niepoprawny adres email", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                                       
+                    MessageBox.Show("Wprowadź poprawny adres email");
+                    return;
                 }
-               
+
 
 
                 //WALIDACJA numer telefonu
-                if (string.IsNullOrWhiteSpace(numericuserPhoneNumber.Text))
+                if (numericuserPhoneNumber.Value == 0)
                 {
                     MessageBox.Show("Musisz wpisać numer telefonu");
-                    if (userAddressPostalCode.Text.Length > 7 && userAddressPostalCode.MaxLength <= 9)
-                    {
-                        MessageBox.Show("Czy na pewno wprowadziłeś poprawny numer telefonu?");
-                    }
                     return;
                 }
+                else if (numericuserPhoneNumber.Value <= 10)
+                {
+                    MessageBox.Show("Czy na pewno wprowadziłeś poprawny numer telefonu?");
+                }
+
 
                 //ZAPISANIE DANYCH użytkownika
                 Klient customer = new Klient();
@@ -232,103 +225,26 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
 
-
-                ////DODANIE DO BAZY DANYCH
-                //string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-                //SqlConnection cnn = new SqlConnection(connectionString);
-                //cnn.Open();
-                ////dodawanie do bazy
-                //SqlDataAdapter sqlKlient = new SqlDataAdapter("INSERT INTO Klient (idKlient, imie, nazwisko, email, nrtelefonu) VALUES(@id, @imie, @nazwisko, @email, @nrtelefonu)", cnn);
-                //string sqlKlient2 = "SELECT COUNT(*), MAX([id]) FROM Klient";
-                //SqlCommand cmd1 = new SqlCommand(sqlKlient2, cnn);
-                //SqlDataReader dataReader = cmd1.ExecuteReader();
-                //int output1 = 0;
-                //while (dataReader.Read())
-                //{
-                //    if ((int)dataReader.GetValue(0) != 0)
-                //    {
-                //        output1 = Convert.ToInt32(dataReader.GetValue(1)) + 1;
-                //    }
-                //}
-                //cmd1.Cancel();
-                //dataReader.Close();
-
-                //SqlCommand cmd = new SqlCommand(sqlKlient.ToString(), cnn);
-                //cmd.Parameters.Add("@idKlient", SqlDbType.Int);
-                //cmd.Parameters["@idKlient"].Value = output1;
-                //cmd.Parameters.Add("@imie", SqlDbType.NChar);
-                //cmd.Parameters["@status"].Value = customer.Imie;
-                //cmd.Parameters.Add("@nazwisko", SqlDbType.NChar);
-                //cmd.Parameters["@nazwisko"].Value = customer.Nazwisko;
-                //cmd.Parameters.Add("@email", SqlDbType.NChar);
-                //cmd.Parameters["@email"].Value = customer.Email;
-                //cmd.Parameters.Add("@nrtelefonu", SqlDbType.NChar);
-                //cmd.Parameters["@nrtelefonu"].Value = customer.Nrtelefonu;
-                //cmd.ExecuteNonQuery();
-                //cmd.Dispose();
-
-                //foreach (Adresy adresy in customerAddressList)
-                //{
-                //    string connectionString2 = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
-                //    SqlConnection cnn2 = new SqlConnection(connectionString);
-                //    cnn2.Open();
-                //    //dodawanie do bazy
-                //    SqlDataAdapter sqlAdresy = new SqlDataAdapter("INSERT INTO Adresy (idAdresy, idKlient, ulica, numerDomu, numerMieszkania, kodPocztowy, miasto) VALUES (NULL, imie, nazwisko, email, nrtelefonu)", cnn2);
-                //    string sqlAdresy2 = "SELECT COUNT(*), MAX([id]) FROM Adresy";
-                //    cmd1 = new SqlCommand(sqlAdresy2, cnn2);
-                //    dataReader = cmd1.ExecuteReader();
-                //    int output2 = 0;
-                //    while (dataReader.Read())
-                //    {
-                //        if ((int)dataReader.GetValue(0) != 0)
-                //        {
-                //            output2 = Convert.ToInt32(dataReader.GetValue(1)) + 1;
-                //        }
-                //    }
-                //    cmd1.Cancel();
-                //    dataReader.Close();
-
-                //    SqlCommand cmd3 = new SqlCommand(sqlAdresy.ToString(), cnn);
-                //    cmd3.Parameters.Add("@idAdresy", SqlDbType.Int);
-                //    cmd3.Parameters["@idAdresy"].Value = output2;
-
-                //    cmd3.Parameters.Add("idKlient", SqlDbType.Int);
-                //    cmd3.Parameters["@idKlient"].Value = output1;
-
-                //    cmd3.Parameters.Add("@ulica", SqlDbType.VarChar);
-                //    cmd3.Parameters["@ulica"].Value = addressCustomer.Ulica;
-
-                //    cmd3.Parameters.Add("@numerDomu", SqlDbType.VarChar);
-                //    cmd3.Parameters["@numerDomu"].Value = addressCustomer.NumerDomu;
-
-                //    cmd3.Parameters.Add("@numerMieszkania", SqlDbType.VarChar);
-                //    cmd3.Parameters["@numerMieszkania"].Value = addressCustomer.NumerMieszkania;
-
-                //    cmd3.Parameters.Add("@id_Seat", SqlDbType.VarChar);
-                //    cmd3.Parameters["@id_Seat"].Value = addressCustomer.KodPocztowy;
-
-                //    cmd3.Parameters.Add("@kodPocztowy", SqlDbType.VarChar);
-                //    cmd3.Parameters["@kodPocztowy"].Value = addressCustomer.Miasto;
-                //    cmd3.ExecuteNonQuery();
-                //    cmd3.Dispose();
-                //    cnn.Close();
-                //}
-
-                //wywołanie WYBORU SPOSOBU ZAPŁATY
-                DialogResult result = MessageBox.Show("Czy na pewno wprowadziłeś poprawne dane?", "Confirmation", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (!(string.IsNullOrWhiteSpace(userName.Text)) ||
+                    !(string.IsNullOrWhiteSpace(userFamilyName.Text)) ||
+                    !(string.IsNullOrWhiteSpace(userEmail.Text)) ||
+                    !(string.IsNullOrWhiteSpace(numericuserPhoneNumber.Value.ToString())) ||
+                    !(string.IsNullOrWhiteSpace(userAddressStreet.Text)) ||
+                    !(string.IsNullOrWhiteSpace(userAddressStreetNumber.Text)) ||
+                    !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
+                    !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList,listOfTheDishes2,orderItemList2,totalPrice);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {   //wywołanie STRONY GŁOWNEJ
