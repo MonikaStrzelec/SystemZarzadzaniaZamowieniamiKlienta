@@ -33,6 +33,35 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             }
 
             textBox2.Text = "7";
+            deleteOldClients();
+        }
+
+        void deleteOldClients()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
+            string sqlQuery = null;
+            SqlConnection cnn = new SqlConnection(connectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            cnn.Open();
+            sqlQuery = "DELETE FROM Zamowienie WHERE statusZamowienia = 'dostarczone' ";
+            // '" + dataReader3.GetValue(0).ToString() + "'";
+            /*try
+            {
+                
+                adapter.DeleteCommand = cnn.CreateCommand();
+                adapter.DeleteCommand.CommandText = sqlQuery;
+                adapter.DeleteCommand.ExecuteNonQuery();
+                MessageBox.Show("Row(s) deleted !! ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }*/
+            SqlCommand query = new SqlCommand("DELETE FROM Zamowienie WHERE statusZamowienia = 'dostarczone' AND DATEDIFF(DD, dataZamowienia, GETDATE()) >= 30", cnn);
+            query.ExecuteNonQuery();
+
+            MessageBox.Show("Deleted...");
+            cnn.Close();
         }
 
         public decimal setTotalPrice(decimal totalPrice)
