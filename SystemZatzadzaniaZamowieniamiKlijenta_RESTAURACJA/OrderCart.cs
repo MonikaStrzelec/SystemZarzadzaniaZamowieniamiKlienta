@@ -74,10 +74,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         { }
 
         private void button5_Click(object sender, EventArgs e)
-        {
+        {   
             try
-            {
-                //WALIDACJA adres
+            {   //WALIDACJA adres
                 if (string.IsNullOrWhiteSpace(userAddressStreet.Text))
                 {
                     MessageBox.Show("Musisz wpisać adres");
@@ -121,11 +120,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {
                     MessageBox.Show("Musisz wpisać kod pocztowy");
                 }
-                else
+                else if (!this.userEmail.Text.Contains('-'))
                 {
-                    //validationTextNoSpecialCharacters(userAddressPostalCode);
+                    MessageBox.Show("Wprowadź poprawny kod pocztowy. Musi mieć format: 00-000");
+                    return;
                 }
-
 
 
                 //WALIDACJA imię
@@ -167,7 +166,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
 
 
-
                 //WALIDACJA numer telefonu
                 if (numericuserPhoneNumber.Value == 0)
                 {
@@ -180,15 +178,37 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
 
 
+                //wybrany czas dostawy przez użytkownika
+                string deliveryTime = "";
+                if (radioButtonAsSoonAsPossible.Checked)
+                {   //Najszybciej jak to możliwe
+                    deliveryTime = "50";
+                    return;
+                }
+                else if (radioButton2Hours.Checked)
+                {   //Za dwie godziny
+                    deliveryTime = "120";
+                    return;
+                }
+                else if (radioButtonNoMatter.Checked)
+                {   //Bez znaczenia
+                    deliveryTime = "90";
+                    return;
+                }
+
+
                 //ZAPISANIE DANYCH użytkownika
                 Klient customer = new Klient();
                 Adresy addressCustomer = new Adresy();
+
                 int id = 0;
 
                 customer.Imie = userName.Text;
                 customer.Nazwisko = userFamilyName.Text;
                 customer.Email = userEmail.Text;
                 customer.Nrtelefonu = (int)numericuserPhoneNumber.Value;
+                customer.Komentarz = userComments.Text;
+                customer.CzasDostawy = deliveryTime;
 
                 customer.IdKlient = id;
                 addressCustomer.IdKlient = id;
@@ -223,8 +243,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {   
-            //Pytanie o rezygnacje i powrót do Strony głównej
+        {   //Pytanie o rezygnacje i powrót do Strony głównej
             DialogResult result = MessageBox.Show("Czy na pewno chcesz zrezygnować z zamówienia?", "Potwierdzenie", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
