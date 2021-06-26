@@ -201,7 +201,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cmd4.Cancel();
                     dataReader2.Close();
 
-                    SqlCommand cmd3 = new SqlCommand(sqlPozycjaZamowienia, cnn);
+                    foreach (Danie danie in listOfTheDishes)
+                    {
+
+                    
+
+                        SqlCommand cmd3 = new SqlCommand(sqlPozycjaZamowienia, cnn);
                     cmd3.Parameters.Add("@idPozycjeZamowienia", SqlDbType.Int);
                     cmd3.Parameters["@idPozycjeZamowienia"].Value = output3;
 
@@ -209,16 +214,17 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     cmd3.Parameters["@idZamowienie"].Value = output4;
 
                     cmd3.Parameters.Add("@idDania", SqlDbType.VarChar);
-                    cmd3.Parameters["@idDania"].Value = listOfTheDishes.idDania; //jak byś mogła pobrać
+                        cmd3.Parameters["@idDania"].Value = pozycjaZamowienia.IdDania; //jak byś mogła pobrać
 
                     cmd3.Parameters.Add("@idKlient", SqlDbType.VarChar);
                     cmd3.Parameters["@idKlient"].Value = output1;
 
                     cmd3.Parameters.Add("@iloscKonkretnegoDania", SqlDbType.VarChar);
-                    cmd3.Parameters["@iloscKonkretnegoDania"].Value = adresy.iloscKonkretnegoDania; // jak byś mogła pobrać
+                        cmd3.Parameters["@iloscKonkretnegoDania"].Value = pozycjaZamowienia.IloscKonkretnegoDania; // jak byś mogła pobrać
                     cmd3.ExecuteNonQuery();
                     cmd3.Dispose();
                     cnn.Close();
+                    }
                 }
 
 
