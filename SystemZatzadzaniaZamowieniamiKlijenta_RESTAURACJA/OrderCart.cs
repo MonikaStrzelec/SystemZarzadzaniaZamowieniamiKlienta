@@ -18,7 +18,9 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Klient> clientList = new List<Klient>();
         List<Adresy> customerAddressList = new List<Adresy>();
-       
+        List<Danie> listOfTheDishes = new List<Danie>();
+        List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
+
         decimal totalPrice = 0;
         public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
         {
@@ -47,7 +49,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     }
                 }
             }
-           
         }
 
         public static string validationTextNoSpecialCharacters(TextBox textValidation)
@@ -71,7 +72,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void label14_Click(object sender, EventArgs e)
         { }
-
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -211,7 +211,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
                     !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, totalPrice);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
@@ -221,7 +221,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 MessageBox.Show(ex.Message);
             }
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {   
@@ -245,18 +244,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         { }
 
         private void OrderCart_Load(object sender, EventArgs e)
-        {
-
-        }
+        { }
 
         private void userAddressCity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        { }
 
         private void userAddressCity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        { }
     }
 }

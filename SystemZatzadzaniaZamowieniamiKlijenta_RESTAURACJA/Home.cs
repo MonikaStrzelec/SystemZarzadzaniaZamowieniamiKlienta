@@ -37,17 +37,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         void deleteOldClients()
-        {
-            //Usuwanie starszych zamówień niż 3 miesiące
-            //Kaskadowo również klientów i pozycji zamówienia
-                      
+        {   //Usuwanie starszych zamówień niż 3 miesiące
+            //Kaskadowo również klientów i pozycji zamówienia      
             cnn.Open();
-
             try
             {
                 SqlCommand query = new SqlCommand("DELETE FROM Zamowienie WHERE statusZamowienia = 'dostarczone' AND DATEDIFF(DD, dataZamowienia, GETDATE()) > 90", cnn);
                 query.ExecuteNonQuery();
-
             }
             catch(Exception ex)
             {
@@ -153,7 +149,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
             //sprawdzenie godziny
             int hour = DateTime.Now.Hour;
-            if (hour >= 12 && hour < 21)
+            if (hour >= 9 && hour < 21)
             {
                 if (totalPrice > 20)
                 {
@@ -208,7 +204,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
             cnn.Open();
             //wyświetlenie całej listy MENU
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie,nazwaDania, cenaDania, skladniki FROM Danie ", cnn);
@@ -224,9 +219,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             cnn.Close();
         }
 
-        //private void button7_Click(object sender, EventArgs e)
-        //{}
-
         private void button8_Click_1(object sender, EventArgs e)
         {   //DODAWANIE do zamówienia
             Danie dish = new Danie();
@@ -241,8 +233,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     MessageBox.Show("Nie można dodać nieistniejącej pozycji!");
                 }
                 else
-                {
-                    //Pobranie danych dania wybranego przez klienta
+                {   //Pobranie danych dania wybranego przez klienta
                     id = (int)dataGridView1.SelectedCells[0].Value;
                     chosenDish = (string)dataGridView1.SelectedCells[1].Value;
                     priceOfTheDish = (decimal)dataGridView1.SelectedCells[2].Value;
@@ -351,9 +342,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            //Wyświetlenie listy przystawek
-            
+        {   //Wyświetlenie listy przystawek
             cnn.Open();
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Przystawka'", cnn);
             DataTable dishes = new DataTable();
@@ -375,7 +364,6 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
             cnn.Open();
             //Wyświetlenie listy ramenów            
             SqlDataAdapter sql = new SqlDataAdapter("SELECT idDanie, nazwaDania, cenaDania, skladniki FROM Danie INNER JOIN TypDania ON Danie.idTypDania = TypDania.idTypDania WHERE TypDania.nazwa = 'Ramen'", cnn);
