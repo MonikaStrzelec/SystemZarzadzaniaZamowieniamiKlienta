@@ -25,4 +25,4 @@ w plikach wykorzystywane są:
 * using System.Windows.Forms;
 
 ## Instalacja
-Zaleca się pobranie programu za pomocą GitHube w dowolnym, pustym folderze.
+Zaleca się pobranie programu za pomocą GitHub w dowolnym, pustym folderze.
