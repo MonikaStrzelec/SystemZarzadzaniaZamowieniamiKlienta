@@ -120,7 +120,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {
                     MessageBox.Show("Musisz wpisać kod pocztowy");
                 }
-                else if (!this.userEmail.Text.Contains('-'))
+                else if (!this.userAddressPostalCode.Text.Contains('-'))
                 {
                     MessageBox.Show("Wprowadź poprawny kod pocztowy. Musi mieć format: 00-000");
                     return;
@@ -217,7 +217,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 addressCustomer.NumerDomu = userAddressStreetNumber.Text;
                 addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
                 addressCustomer.KodPocztowy = userAddressPostalCode.Text;
-                addressCustomer.Miasto = userAddressCity.SelectedItem.ToString();
+                if (userAddressCity.SelectedItem == null)
+                {
+                    addressCustomer.Miasto = "Łódź";
+                }
+                else
+                {
+                    addressCustomer.Miasto = userAddressCity.SelectedItem.ToString();
+                }
+                    
 
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
