@@ -10,9 +10,19 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
     public partial class blikPayment : Form
     {
-        public blikPayment()
+        List<Klient> clientListOK;
+        List<Adresy> customerAddressListOK;
+        List<Zamowienie> orderListOK;
+        List<PozycjaZamowienia> orderItemListOK;
+        List<Danie> listOfTheDishesOk;
+        public blikPayment(List<Klient> clientList, List<Adresy> customerAddressList, List<PozycjaZamowienia> orderItemList, List<Zamowienie> orderList, List<Danie> listOfTheDishes)
         {
             InitializeComponent();
+            clientListOK = clientList;
+            customerAddressListOK = customerAddressList;
+            orderListOK = orderList;
+            orderItemListOK = orderItemList;
+            listOfTheDishesOk = listOfTheDishes;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -31,7 +41,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             {
                 MessageBox.Show("Płatność została zatwierdzona");
                 this.Close();
-                OrderStatusTrue openForm = new OrderStatusTrue();
+                OrderStatusTrue openForm = new OrderStatusTrue(clientListOK, customerAddressListOK, orderItemListOK, orderListOK, listOfTheDishesOk);
                 openForm.ShowDialog();
             } else
             {
