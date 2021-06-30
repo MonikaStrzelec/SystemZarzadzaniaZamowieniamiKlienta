@@ -20,13 +20,17 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         List<Adresy> customerAddressList = new List<Adresy>();
         List<Danie> listOfTheDishes = new List<Danie>();
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
+        List<Zamowienie> orderList = new List<Zamowienie>();
 
-        decimal totalPrice = 0, delivery =0;
-        public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice, decimal delivery)
+        decimal totalPrice = 0, delivery =0, sumPrice =0;
+        public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice, decimal delivery, decimal sumPrice)
         {
             InitializeComponent();
             int idRow = 0;
             textBox1.Text = totalPrice.ToString();
+            textBox2.Text = delivery.ToString();
+            textBox3.Text = sumPrice.ToString();
+
             foreach (Danie d in listOfTheDishes)
             {
                 dataGridView1.Rows.Add(d.NazwaDania, d.CenaDania);
@@ -180,22 +184,39 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
 
                 //wybrany czas dostawy przez użytkownika
-                string deliveryTime = "";
-                if (radioButtonAsSoonAsPossible.Checked)
+                //string deliveryTime = "";
+
+                //TimeSpan timeSpan = TimeSpan.FromSeconds(90);
+                //deliveryTime = string.Format(new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
+
+                DateTime deliveryTime = DateTime.Now; 
+                deliveryTime = deliveryTime.AddMinutes(90);
+
+                /*if (radioButtonAsSoonAsPossible.Checked)
                 {   //Najszybciej jak to możliwe
-                    deliveryTime = "50";
+                    //deliveryTime = "50";
+
+                    timeSpan = TimeSpan.FromSeconds(50);
+                    deliveryTime = string.Format("Full time: {0}", new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
                     return;
                 }
                 else if (radioButton2Hours.Checked)
                 {   //Za dwie godziny
-                    deliveryTime = "120";
+                    // deliveryTime = "120";
+
+
+                    timeSpan = TimeSpan.FromSeconds(120);
+                    deliveryTime = string.Format("Full time: {0}", new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
                     return;
                 }
                 else if (radioButtonNoMatter.Checked)
                 {   //Bez znaczenia
-                    deliveryTime = "90";
+                    //deliveryTime = "90";
+
+                    timeSpan = TimeSpan.FromSeconds(90);
+                    deliveryTime = string.Format(new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
                     return;
-                }
+                } */
 
 
                 //ZAPISANIE DANYCH użytkownika
@@ -210,7 +231,16 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 customer.Nrtelefonu = (int)numericuserPhoneNumber.Value;
                 customer.Komentarz = userComments.Text;
                 customer.CzasDostawy = deliveryTime;
+                
+                totalPrice = Convert.ToDecimal(textBox1.Text);
+                delivery = Convert.ToDecimal(textBox2.Text);
+                sumPrice = Convert.ToDecimal(textBox3.Text);
+                
+                Zamowienie order = new Zamowienie();
+                order.KosztCalkowity = totalPrice;
+                order.KosztDostawy = delivery;
 
+                order.IdZamowienie = id;
                 customer.IdKlient = id;
                 addressCustomer.IdKlient = id;
 
@@ -239,7 +269,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 }
 
 
-
+                orderList.Add(order);
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
 
@@ -252,7 +282,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
                     !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, totalPrice, delivery);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, orderList);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
@@ -289,6 +319,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void OrderCart_Load(object sender, EventArgs e)
         { }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void userAddressCity_TextChanged(object sender, EventArgs e)
         { }

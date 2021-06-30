@@ -62,6 +62,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.button7 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -184,6 +186,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.labelDelivery);
             this.panel1.Controls.Add(this.LabelStatus);
@@ -201,15 +205,16 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // textBox2
             // 
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(140, 208);
+            this.textBox2.Location = new System.Drawing.Point(150, 202);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(80, 23);
             this.textBox2.TabIndex = 21;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // labelDelivery
             // 
             this.labelDelivery.AutoSize = true;
-            this.labelDelivery.Location = new System.Drawing.Point(23, 217);
+            this.labelDelivery.Location = new System.Drawing.Point(23, 202);
             this.labelDelivery.Name = "labelDelivery";
             this.labelDelivery.Size = new System.Drawing.Size(90, 15);
             this.labelDelivery.TabIndex = 20;
@@ -227,10 +232,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(140, 245);
+            this.textBox1.Location = new System.Drawing.Point(150, 231);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 23);
             this.textBox1.TabIndex = 12;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // dataGridView2
             // 
@@ -271,11 +277,11 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(23, 249);
+            this.label6.Location = new System.Drawing.Point(23, 229);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(111, 19);
+            this.label6.Size = new System.Drawing.Size(125, 19);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Kwota całkowita:";
+            this.label6.Text = "Kwota zamówienia:";
             // 
             // panel2
             // 
@@ -412,6 +418,22 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(23, 260);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 15);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Kwota całkowita:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(150, 261);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(80, 23);
+            this.textBox3.TabIndex = 23;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -485,6 +507,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label labelDelivery;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label8;
     }
 }
 

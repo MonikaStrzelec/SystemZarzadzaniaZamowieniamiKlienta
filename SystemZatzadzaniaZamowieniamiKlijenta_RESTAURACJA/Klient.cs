@@ -7,7 +7,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     public class Klient
     {
         int idKlient, nrtelefonu;
-        string imie, nazwisko, email, komentarz, czasDostawy;
+        string imie, nazwisko, email, komentarz;
+        DateTime czasDostawy;
 
         public int IdKlient
         {
@@ -43,7 +44,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             get { return komentarz; }
             set { komentarz = value; }
         }
-        public string CzasDostawy
+        public DateTime CzasDostawy
         {
             get { return czasDostawy; }
             set { czasDostawy = value; }

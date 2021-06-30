@@ -16,7 +16,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Danie> listOfTheDishes = new List<Danie>();
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
-        decimal totalPrice = 0, priceOfTheDish = 0, delivery = 7;
+        decimal totalPrice = 0, priceOfTheDish = 0, delivery = 7, sumPrice=0;
         string chosenDish;
         static string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
         SqlConnection cnn = new SqlConnection(connectionString);
@@ -59,7 +59,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             decimal newTotalPrice = 0;
 
             newTotalPrice = totalPrice * 0.90m;
-            textBox1.Text = newTotalPrice.ToString();
+            textBox3.Text = newTotalPrice.ToString();
             MessageBox.Show("Gratulujemy! Załapałeś się na promocję! \n Twój koszt całkowity to: " + newTotalPrice.ToString());
             return newTotalPrice;
         }
@@ -143,10 +143,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         {
             decimal salePrice = 0;
             var today = DateTime.Now.Date;
+           
 
-            if (!string.IsNullOrEmpty(textBox1.Text))
+            if (!string.IsNullOrEmpty(textBox3.Text))
             {
-                salePrice = decimal.Parse(textBox1.Text);
+                salePrice = decimal.Parse(textBox3.Text);
+                sumPrice = decimal.Parse(textBox3.Text);
             }
 
             //sprawdzenie godziny
@@ -159,21 +161,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     if (today.DayOfWeek.ToString() == "Monday")
                     {
                         setTotalPrice(salePrice);
-                        totalPrice = decimal.Parse(textBox1.Text);
+                        totalPrice = decimal.Parse(textBox3.Text);
                     }
 
                     if (totalPrice > 200)
                     {                       
                         MessageBox.Show("Gratuluje twoja dostawa będzie darmowa!");
                     }
-                    else
-                    {
-                        totalPrice = totalPrice + delivery;
-                    }
+                   
 
                     try
                     {   //Przejście do koszyka i wrzucenie listy zamówień
-                        OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery);
+                        OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery, sumPrice);
                         openForm.ShowDialog();
                     }
                     catch(Exception ex)
@@ -264,6 +263,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     totalPrice = priceFromTextBox + priceAfterAdding;
                     textBox1.Text = totalPrice.ToString();
                     refreshSale(totalPrice);
+                  
+
+                    decimal newTotalPrice = Convert.ToDecimal(textBox1.Text);
+                    if(newTotalPrice > 200)
+                    {
+                        delivery = 0;
+                    }
+                    textBox2.Text = delivery.ToString();
+                    decimal sumPrice = newTotalPrice + delivery;
+                    textBox3.Text = sumPrice.ToString();
+
+
                 }
 
                 //Zliczanie jednostkowej ceny całkowitej
@@ -305,6 +316,15 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                             priceAfterDeleting = priceOfTheDish * amountToDelete;
                             newTotalPrice = totalPrice - priceAfterDeleting;
                             textBox1.Text = newTotalPrice.ToString();
+                           
+                            decimal newTotalPrice2 = Convert.ToDecimal(textBox1.Text);
+                            if (newTotalPrice2 > 200)
+                            {
+                                delivery = 0;
+                            }
+                            textBox2.Text = delivery.ToString();
+                            decimal sumPrice = newTotalPrice2 + delivery;
+                            textBox3.Text = sumPrice.ToString();
 
                             //Usunięcie wybranego dania z listy
                             for (int i = 0; i < listOfTheDishes.Count; i++)
@@ -358,9 +378,20 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             cnn.Close();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
-            OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery);
+            sumPrice = Convert.ToDecimal(textBox3.Text);
+            OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery, sumPrice);
             openForm.ShowDialog();
         }
 

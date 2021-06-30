@@ -17,6 +17,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         private List<Klient> clientListOK;
         private List<Adresy> customerAddressListOK;
+        private List<Zamowienie> orderListOK;
         List<Danie> listOfTheDishes = new List<Danie>();
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
         decimal totalPrice = 0, delivery =0;
@@ -26,11 +27,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         static string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
         SqlConnection cnn = new SqlConnection(connectionString);
-        public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList, List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice, decimal delivery)
+        public ChoosingMethodPayment(List<Klient> clientList, List<Adresy> customerAddressList, List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, List<Zamowienie> orderList)
         {
             InitializeComponent();
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
+            orderListOK = orderList;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -121,68 +123,72 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
 
                 //DODANIE ZAMÓWIENIA DO BAZY
-                ////Zamowienie zamowienie;
-                
-                if (delivery == 0)
-                {
-                    specialOffer = 1;
-                }
-                else if (today.DayOfWeek.ToString() == "Monday")
-                {
-                    specialOffer = 2;
-                }
+                ////Zamowienie zamowienie;             
 
-              
 
                 foreach (Klient clientDetails in clientListOK)
                 {
-                    cnn.Open();
-
-                    string sqlZamowienie = "INSERT INTO Zamowienie (idZamowienie, dataZamowienia, statusZamowienia, opcjePlatnosci, idPromocja, czasDostawy, kosztCalkowity, kosztDostawy, uwagi) VALUES (@idZamowienie, @dataZamowienia, @statusZamowienia, @opcjePlatnosci, @idPromocja, @czasDostawy, @kosztCalkowity, @kosztDostawy, @uwagi)";
-                    string sqlZamowienie2 = "SELECT COUNT(*), MAX([idZamowienie]) FROM Zamowienie";
-                    SqlCommand cmd5 = new SqlCommand(sqlZamowienie2, cnn);
-                    SqlDataReader dataReader3 = cmd5.ExecuteReader();
-                    int output4 = 0;
-                    while (dataReader3.Read())
+                    foreach(Zamowienie order in orderListOK)
                     {
-                        if ((int)dataReader3.GetValue(0) != 0)
+                        cnn.Open();
+
+                        string sqlZamowienie = "INSERT INTO Zamowienie (idZamowienie, dataZamowienia, statusZamowienia, opcjePlatnosci, idPromocja, czasDostawy, kosztCalkowity, kosztDostawy, uwagi) VALUES (@idZamowienie, @dataZamowienia, @statusZamowienia, @opcjePlatnosci, @idPromocja, @czasDostawy, @kosztCalkowity, @kosztDostawy, @uwagi)";
+                        string sqlZamowienie2 = "SELECT COUNT(*), MAX([idZamowienie]) FROM Zamowienie";
+                        SqlCommand cmd5 = new SqlCommand(sqlZamowienie2, cnn);
+                        SqlDataReader dataReader3 = cmd5.ExecuteReader();
+                        int output4 = 0;
+                        while (dataReader3.Read())
                         {
-                            output4 = Convert.ToInt32(dataReader3.GetValue(1)) + 1;
+                            if ((int)dataReader3.GetValue(0) != 0)
+                            {
+                                output4 = Convert.ToInt32(dataReader3.GetValue(1)) + 1;
+                            }
                         }
+                        cmd5.Cancel();
+                        dataReader3.Close();
+
+                        /*if(order.KosztDostawy == 0)
+                        {
+                            specialOffer = 1;
+                        }
+                        else if (today.DayOfWeek.ToString() == "Monday")
+                        {
+                            specialOffer = 2;
+                        } */
+
+                        SqlCommand cmd6 = new SqlCommand(sqlZamowienie, cnn);
+                        cmd6.Parameters.Add("@idZamowienie", SqlDbType.Int);
+                        cmd6.Parameters["@idZamowienie"].Value = output4;
+
+                        cmd6.Parameters.Add("@dataZamowienia", SqlDbType.DateTime);
+                        cmd6.Parameters["@dataZamowienia"].Value = today;
+
+                        cmd6.Parameters.Add("@statusZamowienia", SqlDbType.VarChar);
+                        cmd6.Parameters["@statusZamowienia"].Value = "dostarczone";
+
+                        cmd6.Parameters.Add("@opcjePlatnosci", SqlDbType.VarChar);
+                        cmd6.Parameters["@opcjePlatnosci"].Value = "gotówka";
+
+                        cmd6.Parameters.Add("@idPromocja", SqlDbType.Int);
+                        cmd6.Parameters["@idPromocja"].Value = specialOffer;
+
+                        cmd6.Parameters.Add("@czasDostawy", SqlDbType.DateTime);
+                        cmd6.Parameters["@czasDostawy"].Value = clientDetails.CzasDostawy;
+                                              
+                        cmd6.Parameters.Add("@kosztCalkowity", SqlDbType.Money);
+                        cmd6.Parameters["@kosztCalkowity"].Value = order.KosztCalkowity;
+
+                        cmd6.Parameters.Add("@kosztDostawy", SqlDbType.Money);
+                        cmd6.Parameters["@kosztDostawy"].Value = order.KosztDostawy;
+
+                        cmd6.Parameters.Add("@uwagi", SqlDbType.VarChar);
+                        cmd6.Parameters["@uwagi"].Value = clientDetails.Komentarz;
+                        cmd6.ExecuteNonQuery();
+                        cmd6.Dispose();
+                        cnn.Close();
                     }
-                    cmd5.Cancel();
-                    dataReader3.Close();
-
-                    SqlCommand cmd6 = new SqlCommand(sqlZamowienie, cnn);
-                    cmd6.Parameters.Add("@idZamowienie", SqlDbType.Int);
-                    cmd6.Parameters["@idZamowienie"].Value = output4;
-
-                    cmd6.Parameters.Add("@dataZamowienia", SqlDbType.DateTime);
-                    cmd6.Parameters["@dataZamowienia"].Value = today;
-
-                    cmd6.Parameters.Add("@statusZamowienia", SqlDbType.VarChar);
-                    cmd6.Parameters["@statusZamowienia"].Value = "dostarczone";
-
-                    cmd6.Parameters.Add("@opcjePlatnosci", SqlDbType.VarChar);
-                    cmd6.Parameters["@opcjePlatnosci"].Value = "gotówka";
-
-                    cmd6.Parameters.Add("@idPromocja", SqlDbType.Int);
-                    cmd6.Parameters["@idPromocja"].Value = specialOffer;
-
-                    cmd6.Parameters.Add("@czasDostawy", SqlDbType.DateTime);
-                    cmd6.Parameters["@czasDostawy"].Value = clientDetails.CzasDostawy;
-
-                    cmd6.Parameters.Add("@kosztCalkowity", SqlDbType.Money);
-                    cmd6.Parameters["@kosztCalkowity"].Value = totalPrice;
-
-                    cmd6.Parameters.Add("@kosztDostawy", SqlDbType.Money);
-                    cmd6.Parameters["@kosztDostawy"].Value = delivery;
-
-                    cmd6.Parameters.Add("@uwagi", SqlDbType.VarChar);
-                    cmd6.Parameters["@uwagi"].Value = clientDetails.Komentarz;
-                    cmd6.ExecuteNonQuery();
-                    cmd6.Dispose();
-                    cnn.Close();
+                    
+                    
 
                 }
 
