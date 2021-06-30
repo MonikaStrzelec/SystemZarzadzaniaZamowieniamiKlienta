@@ -18,8 +18,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         private List<Klient> clientListOK;
         private List<Adresy> customerAddressListOK;
         private List<Zamowienie> orderListOK;
-        List<Danie> listOfTheDishes = new List<Danie>();
-        List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
+        private List<PozycjaZamowienia> orderItemListOK;
         decimal totalPrice = 0, delivery =0;
         int specialOffer = 0;
         DateTime today = DateTime.Now.Date;
@@ -33,6 +32,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             clientListOK = clientList;
             customerAddressListOK = customerAddressList;
             orderListOK = orderList;
+            orderItemListOK = orderItemList;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -185,6 +185,47 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                         cmd6.Parameters["@uwagi"].Value = clientDetails.Komentarz;
                         cmd6.ExecuteNonQuery();
                         cmd6.Dispose();
+
+                        foreach(PozycjaZamowienia orderItem in orderItemListOK)
+                        {
+                            string sqlPozycjaZamowienia = "INSERT INTO PozycjaZamowienia (idPozycjaZamowienia, idZamowienie, idDania, idKlient,iloscKonkretnegoDania) VALUES (@idPozycjaZamowienia, @idZamowienie, @idDania, @idKlient, @iloscKonkretnegoDania)";
+                            string sqlPozycjaZamowienia2 = "SELECT COUNT(*), MAX([idPozycjaZamowienia]) FROM PozycjaZamowienia";
+                            SqlCommand cmd7 = new SqlCommand(sqlPozycjaZamowienia2, cnn);
+                            SqlDataReader dataReader4 = cmd5.ExecuteReader();
+                            int output5 = 0;
+                            while (dataReader4.Read())
+                            {
+                                if ((int)dataReader4.GetValue(0) != 0)
+                                {
+                                    output5 = Convert.ToInt32(dataReader4.GetValue(1)) + 1;
+                                }
+                            }
+                            cmd7.Cancel();
+                            dataReader4.Close();
+
+
+                            SqlCommand cmd8 = new SqlCommand(sqlPozycjaZamowienia, cnn);
+
+                            cmd8.Parameters.Add("@idPozycjaZamowienia", SqlDbType.Int);
+                            cmd8.Parameters["@idPozycjaZamowienia"].Value = output5;
+
+                            cmd8.Parameters.Add("@idZamowienie", SqlDbType.Int);
+                            cmd8.Parameters["@idZamowienie"].Value = output4;
+
+                            cmd8.Parameters.Add("@idDania", SqlDbType.Int);
+                            cmd8.Parameters["@idDania"].Value = orderItem.IdDania;
+
+                            cmd8.Parameters.Add("@idKlient", SqlDbType.Int);
+                            cmd8.Parameters["@idKlient"].Value = output4;
+
+                            cmd8.Parameters.Add("@iloscKonkretnegoDania", SqlDbType.Int);
+                            cmd8.Parameters["@iloscKonkretnegoDania"].Value = orderItem.IloscKonkretnegoDania;
+
+                            cmd8.ExecuteNonQuery();
+                            cmd8.Dispose();
+
+                        }
+
                         cnn.Close();
                     }
                     
@@ -219,84 +260,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 {   //brak zaznaczonej płatności
                     DialogResult result = MessageBox.Show("Musisz wybrać petodę płatności!", "Confirmation", MessageBoxButtons.YesNo);
                 }
-                //SqlCommand cmd6 = new SqlCommand(sqlZamowienie, cnn);
-                //cmd6.Parameters.Add("@idZamowienie", SqlDbType.Int);
-                //cmd6.Parameters["@idZamowienie"].Value = output4;
-
-                //cmd6.Parameters.Add("@dataZamowienia", SqlDbType.DateTime);
-                //cmd6.Parameters["@dataZamowienia"].Value = DateTime.Now.Date;
-
-                //cmd6.Parameters.Add("@statusZamowienia", SqlDbType.VarChar);
-                //cmd6.Parameters["@statusZamowienia"].Value = "Zamówienie czeka na potwierdzenie";
-
-                //cmd6.Parameters.Add("@opcjePlatnosci", SqlDbType.VarChar);
-                //cmd6.Parameters["@opcjePlatnosci"].Value = label2.Text;
-
-                //cmd6.Parameters.Add("@idPromocja", SqlDbType.VarChar);
-                //cmd6.Parameters["@idPromocja"].Value = promocja;
-
-                //cmd6.Parameters.Add("@czasDostawy", SqlDbType.DateTime);
-                //cmd6.Parameters["@czasDostawy"].Value = DateTime.Now.AddMinutes(Convert.ToDouble(client.CzasDostawy));
-
-                //cmd6.Parameters.Add("@kosztCalkowity", SqlDbType.Money);
-                //cmd6.Parameters["@kosztCalkowity"].Value = totalPrice;
-
-                //cmd6.Parameters.Add("@kosztDostawy", SqlDbType.Money);
-                //cmd6.Parameters["@kosztDostawy"].Value = dostawa;
-
-                //cmd6.Parameters.Add("@uwagi", SqlDbType.VarChar);
-                //cmd6.Parameters["@uwagi"].Value = client.Komentarz; //potem poprawić
-
-                //cmd6.ExecuteNonQuery();
-                //cmd6.Dispose();
-                //cnn.Close();
-
-
-                //foreach (PozycjaZamowienia pozycjaZamowienia in orderItemList)
-                //{   //DODAWANIE promocji zamówienia
-                //    cnn.Open();
-                //    //dodawanie do bazy
-                //    string sqlPozycjaZamowienia = "INSERT INTO PozycjeZamowienia (idPozycjeZamowienia, idZamowienie, idDania, idKlient, iloscKonkretnegoDania) VALUES (@idPozycjeZamowienia, @idZamowienie, @idDania, @idKlient, @iloscKonkretnegoDania)";
-
-                //    string sqlPozycjaZamowienia2 = "SELECT COUNT(*), MAX([idAdres]) FROM PozycjeZamowienia";
-                //    SqlCommand cmd4 = new SqlCommand(sqlPozycjaZamowienia2, cnn);
-                //    SqlDataReader dataReader2 = cmd4.ExecuteReader();
-                //    int output3 = 0;
-                //    while (dataReader2.Read())
-                //    {
-                //        if ((int)dataReader2.GetValue(0) != 0)
-                //        {
-                //            output3 = Convert.ToInt32(dataReader2.GetValue(1)) + 1;
-                //        }
-                //    }
-                //    cmd4.Cancel();
-                //    dataReader2.Close();
-
-                //    foreach (Danie danie in listOfTheDishes)
-                //    {
-
-
-
-                //        SqlCommand cmd3 = new SqlCommand(sqlPozycjaZamowienia, cnn);
-                //    cmd3.Parameters.Add("@idPozycjeZamowienia", SqlDbType.Int);
-                //    cmd3.Parameters["@idPozycjeZamowienia"].Value = output3;
-
-                //    cmd3.Parameters.Add("@idZamowienie", SqlDbType.Int);
-                //    cmd3.Parameters["@idZamowienie"].Value = output4;
-
-                //    cmd3.Parameters.Add("@idDania", SqlDbType.VarChar);
-                //        cmd3.Parameters["@idDania"].Value = pozycjaZamowienia.IdDania; //jak byś mogła pobrać
-
-                //    cmd3.Parameters.Add("@idKlient", SqlDbType.VarChar);
-                //    cmd3.Parameters["@idKlient"].Value = output1;
-
-                //    cmd3.Parameters.Add("@iloscKonkretnegoDania", SqlDbType.VarChar);
-                //        cmd3.Parameters["@iloscKonkretnegoDania"].Value = pozycjaZamowienia.IloscKonkretnegoDania; // jak byś mogła pobrać
-                //    cmd3.ExecuteNonQuery();
-                //    cmd3.Dispose();
-                //    cnn.Close();
-                //    }
-                //}
+                               
 
 
 

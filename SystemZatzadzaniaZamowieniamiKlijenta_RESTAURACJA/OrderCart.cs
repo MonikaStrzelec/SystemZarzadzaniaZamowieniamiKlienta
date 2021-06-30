@@ -192,31 +192,28 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 DateTime deliveryTime = DateTime.Now; 
                 deliveryTime = deliveryTime.AddMinutes(90);
 
-                /*if (radioButtonAsSoonAsPossible.Checked)
+                if (radioButtonAsSoonAsPossible.Checked)
                 {   //Najszybciej jak to możliwe
                     //deliveryTime = "50";
 
-                    timeSpan = TimeSpan.FromSeconds(50);
-                    deliveryTime = string.Format("Full time: {0}", new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
+                    deliveryTime = deliveryTime.AddMinutes(50);
                     return;
                 }
                 else if (radioButton2Hours.Checked)
                 {   //Za dwie godziny
                     // deliveryTime = "120";
 
+                    deliveryTime = deliveryTime.AddMinutes(120);
 
-                    timeSpan = TimeSpan.FromSeconds(120);
-                    deliveryTime = string.Format("Full time: {0}", new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
                     return;
                 }
                 else if (radioButtonNoMatter.Checked)
                 {   //Bez znaczenia
                     //deliveryTime = "90";
 
-                    timeSpan = TimeSpan.FromSeconds(90);
-                    deliveryTime = string.Format(new DateTime(timeSpan.Ticks).ToString("HH:mm:ss"));
+                    deliveryTime = deliveryTime.AddMinutes(90);
                     return;
-                } */
+                } 
 
 
                 //ZAPISANIE DANYCH użytkownika
