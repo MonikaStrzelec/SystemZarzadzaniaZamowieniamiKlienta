@@ -16,7 +16,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     {
         List<Danie> listOfTheDishes = new List<Danie>();
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
-        decimal totalPrice = 0, priceOfTheDish = 0;
+        decimal totalPrice = 0, priceOfTheDish = 0, delivery = 7;
         string chosenDish;
         static string connectionString = ConfigurationManager.ConnectionStrings["Restaurant"].ConnectionString;
         SqlConnection cnn = new SqlConnection(connectionString);
@@ -33,6 +33,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 totalPrice = decimal.Parse(textBox1.Text);
             }
             textBox2.Text = "7";
+
+            
             deleteOldClients();
         }
 
@@ -139,7 +141,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button5_Click(object sender, EventArgs e)
         {
-            decimal salePrice = 0, dostawa = 7;
+            decimal salePrice = 0;
             var today = DateTime.Now.Date;
 
             if (!string.IsNullOrEmpty(textBox1.Text))
@@ -166,12 +168,12 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     }
                     else
                     {
-                        totalPrice = totalPrice + dostawa;
+                        totalPrice = totalPrice + delivery;
                     }
 
                     try
                     {   //Przejście do koszyka i wrzucenie listy zamówień
-                        OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
+                        OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery);
                         openForm.ShowDialog();
                     }
                     catch(Exception ex)
@@ -358,7 +360,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 
         private void button7_Click(object sender, EventArgs e)
         {
-            OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice);
+            OrderCart openForm = new OrderCart(listOfTheDishes, orderItemList, totalPrice, delivery);
             openForm.ShowDialog();
         }
 

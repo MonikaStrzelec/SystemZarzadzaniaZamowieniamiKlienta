@@ -21,8 +21,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
         List<Danie> listOfTheDishes = new List<Danie>();
         List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
 
-        decimal totalPrice = 0;
-        public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice)
+        decimal totalPrice = 0, delivery =0;
+        public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice, decimal delivery)
         {
             InitializeComponent();
             int idRow = 0;
@@ -102,7 +102,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     MessageBox.Show("Musisz wpisać numer ulicy");
                     return;
                 }
-                if (userAddressStreetNumber.MaxLength < 7)
+                else if (userAddressStreetNumber.MaxLength < 7)
                 {
                     MessageBox.Show("Sprawdź swój numer ulicy, chyba jest za długi");
                     return;
@@ -175,6 +175,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 else if (numericuserPhoneNumber.Value <= 10)
                 {
                     MessageBox.Show("Czy na pewno wprowadziłeś poprawny numer telefonu?");
+                    return;
                 }
 
 
@@ -213,19 +214,31 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                 customer.IdKlient = id;
                 addressCustomer.IdKlient = id;
 
-                addressCustomer.Ulica = userAddressStreet.Text;
-                addressCustomer.NumerDomu = userAddressStreetNumber.Text;
-                addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
-                addressCustomer.KodPocztowy = userAddressPostalCode.Text;
-                if (userAddressCity.SelectedItem == null)
+                try
                 {
-                    addressCustomer.Miasto = "Łódź";
-                }
-                else
-                {
-                    addressCustomer.Miasto = userAddressCity.SelectedItem.ToString();
-                }
+                    addressCustomer.Ulica = userAddressStreet.Text;
+                    addressCustomer.NumerDomu = userAddressStreetNumber.Text;
+                    addressCustomer.NumerMieszkania = userAddressApartmentNumber.Text;
+                    addressCustomer.KodPocztowy = userAddressPostalCode.Text;
                     
+                    //Walidacja miasto
+                    if (userAddressCity.SelectedItem == null)
+                    {
+                        ///addressCustomer.Miasto = "Łódź";
+                        MessageBox.Show("Wybierz miasto!");
+                    }
+                    else
+                    {
+                        addressCustomer.Miasto = userAddressCity.SelectedItem.ToString();
+                    }
+
+                }
+                catch
+                {
+                    MessageBox.Show("Niepoprawnie wypełniony formularz!");
+                }
+
+
 
                 clientList.Add(customer);
                 customerAddressList.Add(addressCustomer);
@@ -239,9 +252,13 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
                     !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, totalPrice);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, totalPrice, delivery);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Coś jest nie tak");
                 }
             }
             catch (Exception ex)

@@ -6,18 +6,18 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
 {
     public class PozycjaZamowienia
     {
-        int idPromocjeZamowienia, idZamowienie, idDania, idKlient, iloscKonkretnegoDania;
+        int idPozycjaZamowienia, idZamowienie, idDania, idKlient, iloscKonkretnegoDania;
 
-        public int IdPromocjeZamowienia
+        public int IdPozycjaZamowienia
         {
             get
             {
-                return idPromocjeZamowienia;
+                return idPozycjaZamowienia;
             }
 
             set
             {
-                idPromocjeZamowienia = value;
+                idPozycjaZamowienia = value;
             }
         }
 
