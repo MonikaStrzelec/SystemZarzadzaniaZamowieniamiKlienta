@@ -17,10 +17,10 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
     public partial class OrderCart : Form
     {
         List<Klient> clientList = new List<Klient>();
-        List<Adresy> customerAddressList = new List<Adresy>();
-        List<Danie> listOfTheDishes = new List<Danie>();
-        List<PozycjaZamowienia> orderItemList = new List<PozycjaZamowienia>();
+        List<Adresy> customerAddressList = new List<Adresy>();       
         List<Zamowienie> orderList = new List<Zamowienie>();
+        List<PozycjaZamowienia> orderItemListOk;
+        List<Danie> listOfTheDishesOk;
 
         decimal totalPrice = 0, delivery =0, sumPrice =0;
         public OrderCart(List<Danie> listOfTheDishes, List<PozycjaZamowienia> orderItemList, decimal totalPrice, decimal delivery, decimal sumPrice)
@@ -30,6 +30,8 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
             textBox1.Text = totalPrice.ToString();
             textBox2.Text = delivery.ToString();
             textBox3.Text = sumPrice.ToString();
+            orderItemListOk = orderItemList;
+            listOfTheDishesOk = listOfTheDishes;
 
             foreach (Danie d in listOfTheDishes)
             {
@@ -279,7 +281,7 @@ namespace SystemZatzadzaniaZamowieniamiKlijenta_RESTAURACJA
                     !(string.IsNullOrWhiteSpace(userAddressPostalCode.Text)) ||
                     !(string.IsNullOrWhiteSpace(userAddressCity.Text)))
                 {
-                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishes, orderItemList, orderList);
+                    ChoosingMethodPayment openForm = new ChoosingMethodPayment(clientList, customerAddressList, listOfTheDishesOk, orderItemListOk, orderList);
                     //ChoosingMethodPayment openForm = new ChoosingMethodPayment();
                     openForm.ShowDialog();
                 }
